@@ -362,7 +362,7 @@ export default function QuickBookingForm() {
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🚐 Preferred Vehicle</label>
               <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
-                <option value="Toyota KDH Van">Toyota KDH High-Roof Van (AC, 10-14 Seats)</option>
+                <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
                 <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
                 <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
               </select>
@@ -383,7 +383,7 @@ export default function QuickBookingForm() {
                   <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🧳 Vehicle & Luggage Fit</strong>
                   <p style={{ margin: 0, fontSize: '.85rem' }}>
                     {formData.vehicle.includes('KDH')
-                      ? 'Spacious high-roof van ideal for groups with up to 10 large suitcases.'
+                      ? 'Spacious van ideal for groups with up to 10 large suitcases.'
                       : 'Ideal for light luggage and comfortable group travel.'}
                   </p>
                 </div>
@@ -495,7 +495,7 @@ export default function QuickBookingForm() {
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🚐 Preferred Vehicle</label>
             <select name="vehicle" value={formData.vehicle} onChange={handleChange} style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
-              <option value="Toyota KDH Van">Toyota KDH High-Roof Van (AC, 10-14 Seats)</option>
+              <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
               <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
               <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
             </select>

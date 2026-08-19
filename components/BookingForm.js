@@ -194,7 +194,7 @@ function BookingFormContent() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="Toyota KDH Van">Toyota KDH High-Roof Van (10-14 Seats, AC)</option>
+                  <option value="Toyota KDH Van">Toyota KDH Van (10-14 Seats, AC)</option>
                   <option value="Budget Car (Wagon R)">Budget Car - Wagon R (1-3 Seats, AC)</option>
                   <option value="Mini Bus">Tourist Mini Bus (15-30 Seats, AC)</option>
                 </select>

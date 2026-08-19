@@ -60,7 +60,7 @@ export default function VehiclesPage() {
                   <h3>🚐 Toyota KDH Van</h3>
                   <span className="badge badge-green">Most Popular</span>
                 </div>
-                <p className="vehicle-subtitle">Air Conditioned | High Roof | Professional Driver</p>
+                <p className="vehicle-subtitle">Air Conditioned | Professional Driver</p>
                 <div className="vehicle-specs">
                   <div className="vehicle-spec"><span className="spec-icon">👥</span> 10 - 14 Seats</div>
                   <div className="vehicle-spec"><span className="spec-icon">❄️</span> Dual Air Conditioning</div>

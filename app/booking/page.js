@@ -43,7 +43,7 @@ export default function BookingPage() {
                     <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> 24/7 Island-Wide Airport Pickup & Drop
                   </li>
                   <li style={{ display: 'flex', gap: '.6rem', alignItems: 'flex-start' }}>
-                    <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> Toyota KDH High-Roof AC Vans & Wagons
+                    <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> Toyota KDH AC Vans & Wagons
                   </li>
                   <li style={{ display: 'flex', gap: '.6rem', alignItems: 'flex-start' }}>
                     <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> Professional, Polite & Experienced Driver
