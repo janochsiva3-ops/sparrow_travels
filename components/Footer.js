@@ -64,9 +64,9 @@ export default function Footer() {
 
         <div className="footer-col">
           <h5>Contact Us</h5>
-          <p>📞 0771995814</p>
-          <p style={{ marginTop: '.5rem' }}>📱 WhatsApp: 0771995814 (24/7)</p>
-          <p style={{ marginTop: '.5rem' }}>📧 sparrowtravels.kili@gmail.com</p>
+          <p><a href="tel:0771995814" className="footer-location-link">📞 0771995814</a></p>
+          <p style={{ marginTop: '.5rem' }}><a href="https://wa.me/94771995814" target="_blank" rel="noopener noreferrer" className="footer-location-link">📱 WhatsApp: 0771995814 (24/7)</a></p>
+          <p style={{ marginTop: '.5rem' }}><a href="mailto:sparrowtravels.kili@gmail.com" className="footer-location-link">📧 sparrowtravels.kili@gmail.com</a></p>
           <p style={{ marginTop: '.5rem' }}>
             <a href="https://maps.app.goo.gl/t8DpiuYnVThozSy17" target="_blank" rel="noopener noreferrer" className="footer-location-link">
               📍 Kilinochchi & Northern Province, Sri Lanka (View Map)
