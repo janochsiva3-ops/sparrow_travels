@@ -44,7 +44,7 @@ function CounterItem({ target, suffix = '', label }) {
 
 export default function StatCounters() {
   return (
-    <div className="grid-2" style={{ gap: '1rem' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
       <CounterItem target={10} suffix="+" label="Years Experience" />
       <CounterItem target={500} suffix="+" label="Happy Clients" />
       <CounterItem target={9} suffix="" label="Destinations Covered" />

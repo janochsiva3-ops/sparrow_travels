@@ -335,7 +335,7 @@ export const SRI_LANKA_DISTRICTS = [
     highlights: ["Ethagala Buddha", "Yapahuwa Citadel", "Ridi Viharaya", "Kurunegala Lake"],
     overview: "Kurunegala is surrounded by 8 giant rock mountains, crowned by Ethagala Buddha statue and the historic Yapahuwa Rock Citadel.",
     places: [
-      { name: "Ethagala (Elephant Rock ) & Giant Buddha", icon: "🧘‍♂️", description: "325m rock mountain topped by an 88ft giant white Buddha statue overlooking Kurunegala town & lake." },
+      { name: "Ethagala (Elephant Rock) & Giant Buddha", icon: "🧘‍♂️", description: "325m rock mountain topped by an 88ft giant white Buddha statue overlooking Kurunegala town & lake." },
       { name: "Yapahuwa Rock Citadel", icon: "🏰", description: "13th-century royal capital built on a 90m high granite rock, famous for its ornate stone staircase." },
       { name: "Ridi Viharaya (Silver Temple)", icon: "🛕", description: "Ancient cave temple built by King Dutugemunu in 2nd century BC where silver ore was discovered." },
       { name: "Kurunegala Lake Promenade", icon: "🌊", description: "Scenic urban lake surrounded by walking paths, parks, and mountain views." }
