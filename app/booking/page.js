@@ -28,7 +28,7 @@ export default function BookingPage() {
       {/* BOOKING FORM SECTION */}
       <section className="section" style={{ background: 'var(--bg)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '3rem', alignItems: 'start' }} className="booking-layout">
+          <div className="booking-layout">
             {/* Booking Form */}
             <BookingForm />
 
