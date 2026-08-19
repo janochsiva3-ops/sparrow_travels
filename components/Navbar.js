@@ -74,9 +74,10 @@ export default function Navbar() {
           </Link>
 
           <button
-            className="nav-hamburger"
+            className={`nav-hamburger ${isMobileOpen ? 'active' : ''}`}
             id="hamburger"
             aria-label="Toggle menu"
+            aria-expanded={isMobileOpen}
             onClick={() => setIsMobileOpen(!isMobileOpen)}
           >
             <span></span>
@@ -86,14 +87,35 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Mobile Backdrop Overlay */}
+      <div
+        className={`mobile-menu-overlay ${isMobileOpen ? 'open' : ''}`}
+        onClick={closeMenu}
+        aria-hidden="true"
+      ></div>
+
       {/* Mobile Drawer */}
       <div className={`mobile-menu ${isMobileOpen ? 'open' : ''}`} id="mobileMenu">
-        <Link href="/" onClick={closeMenu}>Home</Link>
-        <Link href="/vehicles" onClick={closeMenu}>Vehicles</Link>
-        <Link href="/tours" onClick={closeMenu}>Tours & Destinations</Link>
-        <Link href="/about" onClick={closeMenu}>About Us</Link>
-        <Link href="/contact" onClick={closeMenu}>Contact</Link>
-        <Link href="/booking" onClick={closeMenu} style={{ color: 'var(--accent)', fontWeight: 700 }}>
+        <Link href="/" className={isActive('/') ? 'active' : ''} onClick={closeMenu}>
+          Home
+        </Link>
+        <Link href="/vehicles" className={isActive('/vehicles') ? 'active' : ''} onClick={closeMenu}>
+          Vehicles
+        </Link>
+        <Link href="/tours" className={isActive('/tours') ? 'active' : ''} onClick={closeMenu}>
+          Tours & Destinations
+        </Link>
+        <Link href="/about" className={isActive('/about') ? 'active' : ''} onClick={closeMenu}>
+          About Us
+        </Link>
+        <Link href="/contact" className={isActive('/contact') ? 'active' : ''} onClick={closeMenu}>
+          Contact
+        </Link>
+        <Link
+          href="/booking"
+          onClick={closeMenu}
+          className={`mobile-cta ${isActive('/booking') ? 'active' : ''}`}
+        >
           📋 Book a Trip
         </Link>
       </div>
