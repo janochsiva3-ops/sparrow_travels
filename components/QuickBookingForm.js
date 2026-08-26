@@ -191,7 +191,7 @@ export default function QuickBookingForm() {
       analysisMsg +
       `Please confirm price, driver assignment, and vehicle availability. Thank you!`;
 
-    window.open(`https://wa.me/94771995814?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/94754013974?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
@@ -415,7 +415,7 @@ export default function QuickBookingForm() {
               <i className="fa-solid fa-check-circle"></i> Proceed to Quick Booking
             </button>
             <a
-              href={`https://wa.me/94771995814?text=${encodeURIComponent(
+              href={`https://wa.me/94754013974?text=${encodeURIComponent(
                 `Hello Sparrow Travels! 🦅\n\nI analysed my trip on your website:\n📍 From: ${formData.from || '-'}\n🏁 To: ${formData.to || '-'}\n🚐 Vehicle: ${formData.vehicle}\n👥 Group: ${formData.passengers}\n${routeDetails ? `📏 Exact Distance: ${routeDetails.km} km\n⏱️ Est. Travel Time: ${routeDetails.time}\n` : ''}Please send me a formal quotation!`
               )}`}
               target="_blank"
@@ -508,7 +508,7 @@ export default function QuickBookingForm() {
 
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>📞 Phone / WhatsApp *</label>
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0771995814" required style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
           </div>
         </div>
 

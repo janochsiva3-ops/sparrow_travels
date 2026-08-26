@@ -77,15 +77,15 @@ export default function HomePage() {
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <a
-                    href="https://wa.me/94771995814"
+                    href="https://wa.me/94754013974"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-accent"
                   >
-                    <i className="fa-brands fa-whatsapp"></i> WhatsApp 0771995814
+                    <i className="fa-brands fa-whatsapp"></i> WhatsApp 0754013974
                   </a>
-                  <a href="tel:0771995814" className="btn btn-outline-white">
-                    <i className="fa-solid fa-phone"></i> Call 0771995814
+                  <a href="tel:0754013974" className="btn btn-outline-white">
+                    <i className="fa-solid fa-phone"></i> Call 0754013974
                   </a>
                 </div>
               </div>
@@ -393,11 +393,11 @@ export default function HomePage() {
             <Link href="/booking" className="btn btn-accent btn-lg">
               <i className="fa-solid fa-calendar-check"></i> Book Your Trip Now
             </Link>
-            <a href="https://wa.me/94771995814" target="_blank" rel="noopener noreferrer" className="btn btn-outline-white btn-lg">
+            <a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="btn btn-outline-white btn-lg">
               <i className="fa-brands fa-whatsapp"></i> Chat on WhatsApp
             </a>
-            <a href="tel:0771995814" className="btn btn-outline-white btn-lg">
-              <i className="fa-solid fa-phone"></i> Call 0771995814
+            <a href="tel:0754013974" className="btn btn-outline-white btn-lg">
+              <i className="fa-solid fa-phone"></i> Call 0754013974
             </a>
           </div>
         </div>

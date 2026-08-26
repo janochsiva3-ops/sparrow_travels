@@ -270,8 +270,8 @@ export default function ToursPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/booking" className="btn btn-accent btn-lg"><i className="fa-solid fa-calendar-check"></i> Book Your Tour</Link>
-            <a href="https://wa.me/94771995814" target="_blank" rel="noopener noreferrer" className="btn btn-outline-white btn-lg"><i className="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
-            <a href="tel:0771995814" className="btn btn-outline-white btn-lg"><i className="fa-solid fa-phone"></i> Call 0771995814</a>
+            <a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="btn btn-outline-white btn-lg"><i className="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+            <a href="tel:0754013974" className="btn btn-outline-white btn-lg"><i className="fa-solid fa-phone"></i> Call 0754013974</a>
           </div>
         </div>
       </section>

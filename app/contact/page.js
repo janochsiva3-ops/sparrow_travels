@@ -27,7 +27,7 @@ export default function ContactPage() {
           {/* Quick Contact Cards */}
           <div className="grid-4 mb-4">
             <a
-              href="https://wa.me/94771995814"
+              href="https://wa.me/94754013974"
               target="_blank"
               rel="noopener noreferrer"
               className="card"
@@ -51,11 +51,11 @@ export default function ContactPage() {
               </div>
               <h4>WhatsApp</h4>
               <p style={{ fontSize: '.85rem', marginBottom: '.5rem' }}>Fastest way to reach us</p>
-              <span style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--primary)' }}>0771995814</span>
+              <span style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--primary)' }}>0754013974</span>
             </a>
 
             <a
-              href="tel:0771995814"
+              href="tel:0754013974"
               className="card"
               style={{ padding: '1.75rem', textAlign: 'center', textDecoration: 'none', display: 'block' }}
             >
@@ -77,7 +77,7 @@ export default function ContactPage() {
               </div>
               <h4>Voice Call</h4>
               <p style={{ fontSize: '.85rem', marginBottom: '.5rem' }}>Call us anytime 24/7</p>
-              <span style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--primary)' }}>0771995814</span>
+              <span style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--primary)' }}>0754013974</span>
             </a>
 
             <a
@@ -162,22 +162,22 @@ export default function ContactPage() {
               <div className="divider"></div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <a href="https://wa.me/94771995814" target="_blank" rel="noopener noreferrer" className="contact-info-card">
+                <a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="contact-info-card">
                   <div className="contact-info-icon" style={{ background: '#f0fdf4', color: '#25d366' }}>
                     <i className="fa-brands fa-whatsapp"></i>
                   </div>
                   <div className="contact-info-text">
                     <h4>WhatsApp (Fastest)</h4>
-                    <p>0771995814</p>
+                    <p>0754013974</p>
                   </div>
                 </a>
-                <a href="tel:0771995814" className="contact-info-card">
+                <a href="tel:0754013974" className="contact-info-card">
                   <div className="contact-info-icon">
                     <i className="fa-solid fa-phone"></i>
                   </div>
                   <div className="contact-info-text">
                     <h4>Voice Call</h4>
-                    <p>0771995814</p>
+                    <p>0754013974</p>
                   </div>
                 </a>
                 <a href="mailto:sparrowtravels.kili@gmail.com" className="contact-info-card">
@@ -247,7 +247,7 @@ export default function ContactPage() {
             <div className="card">
               <div className="card-body">
                 <h4 style={{ marginBottom: '.5rem' }}>⏰ What are your operating hours?</h4>
-                <p style={{ fontSize: '.9rem' }}>We are available 24/7 via WhatsApp and phone calls at 0771995814.</p>
+                <p style={{ fontSize: '.9rem' }}>We are available 24/7 via WhatsApp and phone calls at 0754013974.</p>
               </div>
             </div>
             <div className="card">
@@ -260,7 +260,7 @@ export default function ContactPage() {
               <div className="card-body">
                 <h4 style={{ marginBottom: '.5rem' }}>💳 How do I confirm a booking?</h4>
                 <p style={{ fontSize: '.9rem' }}>
-                  Simply fill in our booking form or message us on WhatsApp at 0771995814. We will discuss the details and confirm your booking. No upfront payment required to enquire.
+                  Simply fill in our booking form or message us on WhatsApp at 0754013974. We will discuss the details and confirm your booking. No upfront payment required to enquire.
                 </p>
               </div>
             </div>

@@ -60,7 +60,7 @@ function BookingFormContent() {
       `━━━━━━━━━━━━━━━━\n` +
       `Please confirm price and vehicle availability. Thank you!`;
 
-    window.open(`https://wa.me/94771995814?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/94754013974?text=${encodeURIComponent(msg)}`, '_blank');
     setSubmitted(true);
   };
 
@@ -77,7 +77,7 @@ function BookingFormContent() {
               Your transfer details have been generated and sent to our WhatsApp team. We will review your route and confirm your quote & vehicle instantly.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="https://wa.me/94771995814" target="_blank" rel="noopener noreferrer" className="btn btn-accent">
+              <a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="btn btn-accent">
                 <i className="fa-brands fa-whatsapp"></i> Chat on WhatsApp
               </a>
               <Link href="/" className="btn btn-primary">
@@ -223,7 +223,7 @@ function BookingFormContent() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="0771995814"
+                  placeholder="0754013974"
                   required
                 />
               </div>

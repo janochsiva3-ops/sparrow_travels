@@ -63,12 +63,12 @@ export default function BookingPage() {
                   Need an immediate response? Message our booking team on WhatsApp directly.
                 </p>
                 <a
-                  href="https://wa.me/94771995814"
+                  href="https://wa.me/94754013974"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-accent btn-full"
                 >
-                  <i className="fa-brands fa-whatsapp"></i> WhatsApp 0771995814
+                  <i className="fa-brands fa-whatsapp"></i> WhatsApp 0754013974
                 </a>
               </div>
             </div>

@@ -39,7 +39,7 @@ export default function VehiclesPage() {
           >
             <span style={{ fontSize: '1.5rem' }}>ℹ️</span>
             <p style={{ margin: 0, fontSize: '.9rem', color: 'var(--text)' }}>
-              All our vehicles include a <strong>friendly professional driver</strong> and <strong>air conditioning</strong>. Call <strong>0771995814</strong> or message on WhatsApp for custom quotes.
+              All our vehicles include a <strong>friendly professional driver</strong> and <strong>air conditioning</strong>. Call <strong>0754013974</strong> or message on WhatsApp for custom quotes.
             </p>
           </div>
 
@@ -159,14 +159,14 @@ export default function VehiclesPage() {
         <div className="container text-center">
           <h2 style={{ color: 'var(--white)', marginBottom: '.75rem' }}>Need a Custom Quote or Route Plan?</h2>
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', marginBottom: '2rem', maxWidth: '500px', marginInline: 'auto' }}>
-            Chat with us on WhatsApp or call 0771995814 anytime. We&apos;ll assist you with custom pricing and route options.
+            Chat with us on WhatsApp or call 0754013974 anytime. We&apos;ll assist you with custom pricing and route options.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/94771995814" target="_blank" rel="noopener noreferrer" className="btn btn-accent btn-lg">
+            <a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="btn btn-accent btn-lg">
               <i className="fa-brands fa-whatsapp"></i> Chat on WhatsApp
             </a>
-            <a href="tel:0771995814" className="btn btn-outline-white btn-lg">
-              <i className="fa-solid fa-phone"></i> Call 0771995814
+            <a href="tel:0754013974" className="btn btn-outline-white btn-lg">
+              <i className="fa-solid fa-phone"></i> Call 0754013974
             </a>
             <Link href="/booking" className="btn btn-outline-white btn-lg">
               <i className="fa-solid fa-calendar-check"></i> Book Online

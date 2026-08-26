@@ -26,7 +26,7 @@ export default function ContactForm() {
       `📌 Subject: ${formData.subject || '-'}\n` +
       `💬 Message: ${formData.message || '-'}`;
 
-    window.open(`https://wa.me/94771995814?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/94754013974?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
@@ -52,7 +52,7 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="0771995814"
+            placeholder="0754013974"
             required
           />
         </div>
