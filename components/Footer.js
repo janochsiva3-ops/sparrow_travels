@@ -25,6 +25,9 @@ export default function Footer() {
             <a href="https://wa.me/94754013974" className="social-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <i className="fa-brands fa-whatsapp"></i>
             </a>
+            <a href="https://www.facebook.com/profile.php?id=61577481892059&mibextid=wwXIfr" className="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <i className="fa-brands fa-facebook-f"></i>
+            </a>
             <a href="https://www.instagram.com/sparrow.8020/" className="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <i className="fa-brands fa-instagram"></i>
             </a>

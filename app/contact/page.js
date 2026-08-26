@@ -81,7 +81,7 @@ export default function ContactPage() {
             </a>
 
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=61577481892059&mibextid=wwXIfr"
               target="_blank"
               rel="noopener noreferrer"
               className="card"
@@ -189,7 +189,7 @@ export default function ContactPage() {
                     <p>sparrowtravels.kili@gmail.com</p>
                   </div>
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="contact-info-card">
+                <a href="https://www.facebook.com/profile.php?id=61577481892059&mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="contact-info-card">
                   <div className="contact-info-icon" style={{ color: '#1877f2' }}>
                     <i className="fa-brands fa-facebook-f"></i>
                   </div>
