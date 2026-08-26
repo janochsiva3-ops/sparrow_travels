@@ -178,7 +178,7 @@ export default function QuickBookingForm() {
     const msg =
       `Hello Sparrow Travels! 🦅\n\n` +
       `*TRIP BOOKING REQUEST*\n` +
-      `━━━━━━━━━━━━━━━━\n` +
+      `-----------------------------------\n` +
       `🔄 Trip Type: ${tripType}\n` +
       `📍 From: ${formData.from || '-'}\n` +
       `🏁 To: ${formData.to || '-'}\n` +
@@ -187,11 +187,11 @@ export default function QuickBookingForm() {
       `🚐 Preferred Vehicle: ${formData.vehicle || '-'}\n` +
       `👤 Name: ${formData.name || '-'}\n` +
       `📞 Phone/WhatsApp: ${formData.phone || '-'}\n` +
-      `━━━━━━━━━━━━━━━━\n` +
+      `-----------------------------------\n` +
       analysisMsg +
       `Please confirm price, driver assignment, and vehicle availability. Thank you!`;
 
-    window.open(`https://wa.me/94754013974?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
@@ -415,7 +415,7 @@ export default function QuickBookingForm() {
               <i className="fa-solid fa-check-circle"></i> Proceed to Quick Booking
             </button>
             <a
-              href={`https://wa.me/94754013974?text=${encodeURIComponent(
+              href={`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(
                 `Hello Sparrow Travels! 🦅\n\nI analysed my trip on your website:\n📍 From: ${formData.from || '-'}\n🏁 To: ${formData.to || '-'}\n🚐 Vehicle: ${formData.vehicle}\n👥 Group: ${formData.passengers}\n${routeDetails ? `📏 Exact Distance: ${routeDetails.km} km\n⏱️ Est. Travel Time: ${routeDetails.time}\n` : ''}Please send me a formal quotation!`
               )}`}
               target="_blank"

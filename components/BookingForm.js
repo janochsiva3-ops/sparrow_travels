@@ -47,7 +47,7 @@ function BookingFormContent() {
     const msg =
       `Hello Sparrow Travels! 🦅\n\n` +
       `*TRIP BOOKING REQUEST*\n` +
-      `━━━━━━━━━━━━━━━━\n` +
+      `-----------------------------------\n` +
       `🔄 Trip Type: ${tripType}\n` +
       `📍 From: ${formData.from || '-'}\n` +
       `🏁 To: ${formData.to || '-'}\n` +
@@ -57,10 +57,10 @@ function BookingFormContent() {
       `👤 Name: ${formData.name || '-'}\n` +
       `📞 Phone/WhatsApp: ${formData.phone || '-'}${emailStr}\n` +
       `💬 Notes: ${formData.message || 'None'}\n` +
-      `━━━━━━━━━━━━━━━━\n` +
+      `-----------------------------------\n` +
       `Please confirm price and vehicle availability. Thank you!`;
 
-    window.open(`https://wa.me/94754013974?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(msg)}`, '_blank');
     setSubmitted(true);
   };
 

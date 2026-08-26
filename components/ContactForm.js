@@ -26,7 +26,7 @@ export default function ContactForm() {
       `📌 Subject: ${formData.subject || '-'}\n` +
       `💬 Message: ${formData.message || '-'}`;
 
-    window.open(`https://wa.me/94754013974?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
