@@ -75,7 +75,7 @@ export default function HomePage() {
                     <i className="fa-solid fa-location-dot"></i> Kilinochchi & Island-Wide
                   </a>
                 </div>
-                <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <div className="hero-logo-btns" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <a
                     href="https://wa.me/94754013974"
                     target="_blank"
@@ -389,7 +389,7 @@ export default function HomePage() {
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', marginBottom: '2rem', maxWidth: '540px', marginInline: 'auto' }}>
             Book your trip today and let Sparrow Travels take care of everything. Fast confirmation via WhatsApp.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="cta-btn-group" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/booking" className="btn btn-accent btn-lg">
               <i className="fa-solid fa-calendar-check"></i> Book Your Trip Now
             </Link>

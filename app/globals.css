@@ -604,10 +604,6 @@ p  { color: var(--text-muted); line-height: 1.7; }
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .dest-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
-  .dest-grid .dest-card:nth-child(1) { grid-column: span 2; grid-row: span 1; height: 260px; }
-  .dest-grid .dest-card:nth-child(2) { grid-column: span 2; height: 210px; }
-  .dest-grid .dest-card:nth-child(3), .dest-grid .dest-card:nth-child(4) { height: 210px; }
   .pricing-card { padding: 1.75rem; }
 }
 
@@ -619,54 +615,70 @@ p  { color: var(--text-muted); line-height: 1.7; }
   .topbar-left .topbar-item:not(:first-child) { display: none; }
   .topbar-divider { display: none; }
   .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
+  .nav-hamburger { display: flex; min-height: 44px; min-width: 44px; justify-content: center; align-items: center; }
   
-  /* Hero Section Stacked Mobile Layout */
-  .hero { min-height: auto; padding-top: calc(var(--topbar-h) + var(--nav-h) + 1.25rem); padding-bottom: 3.5rem; }
-  .hero .grid-2 { grid-template-columns: 1fr !important; gap: 2.25rem !important; }
+  /* Hero Section Stacked Layout */
+  .hero { min-height: auto; padding-top: calc(var(--topbar-h) + var(--nav-h) + 1rem); padding-bottom: 2.75rem; }
+  .hero .grid-2 { grid-template-columns: 1fr !important; gap: 1.75rem !important; }
   .hero-content { text-align: center; padding: 0 !important; }
-  .hero-content h1 { font-size: clamp(1.8rem, 6.5vw, 2.75rem); line-height: 1.2; margin-bottom: 1rem; }
-  .hero-tagline { margin-inline: auto; font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.75rem; max-width: 100%; }
-  .hero-btns { flex-direction: column; width: 100%; gap: 0.75rem; margin-bottom: 2.5rem; }
-  .hero-btns .btn { width: 100%; justify-content: center; min-height: 48px; font-size: 0.95rem; }
-  .hero-stats { justify-content: center; gap: 1.5rem; }
-  .hero-stat .num { font-size: 1.8rem; }
+  .hero-content h1 { font-size: clamp(1.8rem, 6vw, 2.2rem); line-height: 1.2; margin-bottom: 0.85rem; }
+  .hero-tagline { margin-inline: auto; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; max-width: 100%; }
+  .hero-btns { flex-direction: column !important; width: 100% !important; gap: 0.75rem; margin-bottom: 2rem; }
+  .hero-btns .btn { width: 100% !important; justify-content: center !important; min-height: 48px; font-size: 0.95rem; }
+  .hero-logo-btns { flex-direction: column !important; width: 100% !important; gap: 0.75rem !important; }
+  .hero-logo-btns .btn { width: 100% !important; justify-content: center !important; min-height: 44px; }
+  .hero-stats { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0.75rem 0.5rem !important; width: 100%; text-align: center; justify-content: center; }
+  .hero-stat .num { font-size: clamp(1.5rem, 5vw, 1.8rem); margin-bottom: 0.15rem; }
+  .hero-stat .lbl { font-size: 0.75rem; }
   .hero-logo-card { width: 100%; padding: 0.5rem 0; }
-  .hero-logo-img-wrapper { max-width: 200px; margin-bottom: 1rem; }
+  .hero-logo-img-wrapper { max-width: 180px; margin-bottom: 0.85rem; }
   
-  /* Grid Layouts Stacked */
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; gap: 1.25rem; }
+  /* Grid Layouts: 2-column tablet layout (481px-768px) */
+  .grid-2 { grid-template-columns: 1fr !important; gap: 1.5rem; }
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 1.25rem; }
+  .dest-grid { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: auto !important; gap: 1.25rem; }
+  .dest-grid .dest-card:nth-child(1),
+  .dest-grid .dest-card:nth-child(2),
+  .dest-grid .dest-card:nth-child(3),
+  .dest-grid .dest-card:nth-child(4) {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    aspect-ratio: 4/3;
+    height: auto !important;
+  }
+  
   .section { padding-block: 50px; }
   
-  /* Booking Form Single Column Stacking & Touch Targets */
-  .booking-layout { grid-template-columns: 1fr !important; gap: 1.75rem; }
-  .booking-page-form { padding: 1.35rem 1.15rem; border-radius: var(--radius-md); }
-  .quick-booking-card { padding: 1.35rem 1.15rem; border-radius: var(--radius-md); }
+  /* Cards Responsive Padding & Transform Safety */
+  .feature-card, .pricing-card, .vehicle-body, .card-body, .stat-card { padding: 1.25rem; }
+  .pricing-card.featured { transform: none !important; margin: 0; box-shadow: var(--shadow-md); }
+  
+  /* Buttons Stacking & Touch Targets */
+  .btn { min-height: 46px; font-size: 0.95rem; }
+  .cta-btn-group { flex-direction: column !important; width: 100% !important; gap: 0.75rem !important; }
+  .cta-btn-group .btn { width: 100% !important; justify-content: center !important; min-height: 48px; }
+  .btn-full, .btn-accent, .btn-primary { width: 100%; justify-content: center; }
+  
+  /* Booking Form Single Column Stacking */
+  .booking-layout { grid-template-columns: 1fr !important; gap: 1.5rem; }
+  .booking-page-form, .quick-booking-card { padding: 1.35rem 1.15rem; border-radius: var(--radius-md); }
   .form-row { grid-template-columns: 1fr !important; gap: 0.85rem; }
   .form-group { margin-bottom: 1rem; }
   .form-group label { font-size: 0.82rem; margin-bottom: 0.35rem; }
   .form-group input, .form-group select, .form-group textarea {
     min-height: 48px;
     padding: 0.75rem 0.95rem;
-    font-size: 16px; /* Prevents auto-zoom on mobile safari/chrome */
+    font-size: 16px; /* Prevents iOS/Safari auto-zoom */
   }
   .trip-type-wrapper { flex-direction: row; gap: 0.3rem; }
   .trip-type-btn { min-height: 44px; padding: 0.5rem 0.75rem; font-size: 0.82rem; }
   
-  /* Routes We Cover & Pricing Cards Single Column */
+  /* Routes We Cover & Contact */
   .routes-grid { grid-template-columns: 1fr !important; gap: 1rem; }
   .route-card { width: 100%; padding: 1.1rem; }
-  .pricing-card { width: 100%; padding: 1.5rem 1.2rem; }
-  .pricing-card.featured { transform: none; }
-  
-  /* Contact & WhatsApp Section Mobile Optimization */
   .contact-grid { grid-template-columns: 1fr !important; gap: 2rem; }
   .contact-info-card { width: 100%; padding: 1rem; min-height: 48px; }
   .contact-info-icon { width: 44px; height: 44px; font-size: 1.15rem; }
-  
-  /* Full-width touch friendly buttons on mobile */
-  .btn { min-height: 48px; font-size: 0.95rem; }
-  .btn-full, .btn-accent, .btn-primary { width: 100%; justify-content: center; }
   
   /* Footer Responsive */
   .footer { padding-top: 50px; }
@@ -682,18 +694,24 @@ p  { color: var(--text-muted); line-height: 1.7; }
 @media (max-width: 480px) {
   :root { --topbar-h: 0px; --nav-h: 64px; }
   
-  /* Extra Small Mobile Devices (360px - 430px) */
-  .container { width: 94%; padding-inline: 4px; }
-  .dest-grid { grid-template-columns: 1fr; }
-  .dest-grid .dest-card:nth-child(1), .dest-grid .dest-card:nth-child(2) { grid-column: span 1; height: auto; aspect-ratio: 3/2; }
-  .dest-card { aspect-ratio: 3/2; }
+  /* Mobile Devices (320px - 480px): Single Column Layouts */
+  .container { width: 92%; padding-inline: 0.5rem; }
   
-  /* Responsive Heading Scaling */
-  h1 { font-size: clamp(1.65rem, 7vw, 2.2rem); }
-  h2 { font-size: clamp(1.4rem, 5.5vw, 1.9rem); }
-  h3 { font-size: clamp(1.15rem, 4.5vw, 1.4rem); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; gap: 1rem; }
+  .dest-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+  .dest-grid .dest-card { aspect-ratio: 16/10; height: auto !important; }
   
-  .booking-page-form, .quick-booking-card { padding: 1.1rem 0.9rem; }
+  /* Mobile Typography Scale (20-30% reduction) */
+  h1 { font-size: clamp(1.65rem, 6.5vw, 1.95rem); }
+  h2, .section-title { font-size: clamp(1.35rem, 5vw, 1.65rem); }
+  h3 { font-size: clamp(1.1rem, 4.2vw, 1.3rem); }
+  .section-sub { font-size: 0.9rem; line-height: 1.55; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.14em; }
+  
+  .hero-content h1 { font-size: clamp(1.65rem, 6.5vw, 1.95rem); }
+  .hero-tagline { font-size: 0.9rem; }
+  
+  .feature-card, .pricing-card, .vehicle-body, .card-body, .stat-card, .booking-page-form, .quick-booking-card { padding: 1rem; }
   .trip-type-btn { font-size: 0.78rem; padding: 0.45rem 0.5rem; }
   .route-card { padding: 0.9rem 1rem; }
   .route-title { font-size: 0.92rem; }
