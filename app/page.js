@@ -33,7 +33,7 @@ export default function HomePage() {
               </div>
               <div className="hero-stats">
                 <div className="hero-stat">
-                  <span className="num">500+</span>
+                  <span className="num">100+</span>
                   <span className="lbl">Happy Clients</span>
                 </div>
                 <div className="hero-stat">
@@ -41,7 +41,7 @@ export default function HomePage() {
                   <span className="lbl">Destinations</span>
                 </div>
                 <div className="hero-stat">
-                  <span className="num">10+</span>
+                  <span className="num">2+</span>
                   <span className="lbl">Years Experience</span>
                 </div>
               </div>
