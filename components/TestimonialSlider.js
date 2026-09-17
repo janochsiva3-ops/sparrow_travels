@@ -5,26 +5,26 @@ import { useState, useEffect } from 'react';
 const TESTIMONIALS = [
   {
     stars: '★★★★★',
-    text: `"Absolutely wonderful experience with Sparrow Travels! We booked their Toyota KDH van for a family tour across Colombo, Kandy, Sigiriya, and Ella. The van was exceptionally clean, comfortable, and well-maintained with icy cold AC. Driver was punctual, courteous, and drove very safely. Highly recommended!"`,
+    text: `"Very friendly and good driving. Affordable price recharge to jaffna. Vehicles very comfortable."`,
     avatar: 'SF',
     avatarBg: '#4285F4',
-    name: 'Sarah Fernando',
+    name: 'Jeyakarthik Thangavel',
     role: 'Google Reviewer • 5.0 ★★★★★',
   },
   {
     stars: '★★★★★',
-    text: `"Outstanding van service! Available 24/7 on WhatsApp. Picked us up right on time from Colombo Bandaranaike Airport. Very affordable pricing, transparent quote with no hidden fees, and a friendly professional driver. Best travel agency in Sri Lanka!"`,
+    text: `"Excellent service, clean vehicle, polite driver. Safe and comfortable trip. I recommend Sparrow Travels to everyone."`,
     avatar: 'DM',
     avatarBg: '#34A853',
-    name: 'David Miller',
+    name: 'Sivanesan Pavalan',
     role: 'Google Reviewer • 5.0 ★★★★★',
   },
   {
     stars: '★★★★★',
-    text: `"Top-notch private tour service! Took our group across Sigiriya, Nuwara Eliya, and Jaffna. Punctual, safe driving, clean vehicle, and wonderful local insights. Sparrow Travels made our Sri Lanka trip smooth and unforgettable."`,
+    text: `"Very good quality vehicle. Clean and easy to travel anywhere sparrow travels."`,
     avatar: 'AR',
     avatarBg: '#EA4335',
-    name: 'A. Rajendran',
+    name: 'Kps Rajeevan',
     role: 'Google Reviewer • 5.0 ★★★★★',
   },
 ];
