@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 function normalizeCity(name) {
   if (!name) return '';
@@ -140,8 +140,8 @@ export default function QuickBookingForm() {
     to: '',
     date: '',
     return_date: '',
-    passengers: '1-3 Passengers',
-    vehicle: 'Toyota KDH Van',
+    passengers: '',
+    vehicle: '',
     name: '',
     phone: '',
   });
@@ -194,7 +194,37 @@ export default function QuickBookingForm() {
     window.open(`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  const isDetailsVisible = Boolean(formData.from && formData.to);
+  // Step-by-step progressive reveal booleans for mobile
+  const hasFrom = Boolean(formData.from);
+  const hasTo = hasFrom && Boolean(formData.to);
+  const hasDate = hasTo && Boolean(formData.date);
+  const hasReturnDate = tripType === 'Return' ? (hasDate && Boolean(formData.return_date)) : true;
+  const hasPassengers = hasDate && hasReturnDate && Boolean(formData.passengers);
+  const hasVehicle = hasPassengers && Boolean(formData.vehicle);
+  const hasName = hasVehicle && Boolean(formData.name.trim());
+  const hasPhone = hasName && Boolean(formData.phone.trim());
+
+  // Auto-scroll to newly revealed field on mobile
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      let targetEl = null;
+      if (hasPhone) targetEl = document.querySelector('.step-submit-btn');
+      else if (hasName) targetEl = document.querySelector('.step-phone');
+      else if (hasVehicle) targetEl = document.querySelector('.step-name');
+      else if (hasPassengers) targetEl = document.querySelector('.step-vehicle');
+      else if (hasDate && hasReturnDate) targetEl = document.querySelector('.step-passengers');
+      else if (hasDate && tripType === 'Return' && !formData.return_date) targetEl = document.querySelector('.step-return-date');
+      else if (hasTo) targetEl = document.querySelector('.step-date');
+      else if (hasFrom) targetEl = document.querySelector('.step-to');
+
+      if (targetEl && (targetEl.classList.contains('step-visible') || targetEl.classList.contains('visible'))) {
+        const timer = setTimeout(() => {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 150);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [hasFrom, hasTo, hasDate, hasReturnDate, hasPassengers, hasVehicle, hasName, hasPhone, tripType, formData.return_date]);
 
   return (
     <div className="quick-booking-card">
@@ -210,8 +240,8 @@ export default function QuickBookingForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="quick-booking-form-wrap">
-        {/* Mode Switcher Tabs: Quick Booking vs Analyse Your Trip */}
-        <div className="mode-switcher-container order-mode-switcher">
+        {/* TOP TOGGLES: Mode Switcher & Trip Type Selector */}
+        <div className="mode-switcher-container">
           <button
             type="button"
             className={`mode-switcher-btn ${viewMode === 'quick' ? 'active' : ''}`}
@@ -228,8 +258,7 @@ export default function QuickBookingForm() {
           </button>
         </div>
 
-        {/* Trip Type Selector (One-Way / Return) */}
-        <div className="trip-type-wrapper order-trip-type" style={{ marginBottom: '1.25rem' }}>
+        <div className="trip-type-wrapper" style={{ marginBottom: '1.25rem' }}>
           <button
             type="button"
             className={`trip-type-btn ${tripType === 'One-Way' ? 'active' : ''}`}
@@ -246,45 +275,44 @@ export default function QuickBookingForm() {
           </button>
         </div>
 
-        {/* Row 1: Pickup & Dropoff (Mobile Order: 1 - Top of form) */}
-        <div className="form-row order-locations">
-          <div className="form-group">
-            <label>📍 Pick-up Location *</label>
-            <select name="from" value={formData.from} onChange={handleChange} required className="form-control">
-              <option value="">Select Pickup City</option>
-              <option value="Kilinochchi">Kilinochchi</option>
-              <option value="Jaffna">Jaffna</option>
-              <option value="Vavuniya">Vavuniya</option>
-              <option value="Mullaitivu">Mullaitivu</option>
-              <option value="Mannar">Mannar</option>
-              <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-              <option value="Colombo City / Fort">Colombo City</option>
-              <option value="Kandy">Kandy</option>
-              <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
-              <option value="Other">Other Location</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>🏁 Drop-off Destination *</label>
-            <select name="to" value={formData.to} onChange={handleChange} required className="form-control">
-              <option value="">Select Destination</option>
-              <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-              <option value="Colombo City / Fort">Colombo City</option>
-              <option value="Kilinochchi">Kilinochchi</option>
-              <option value="Jaffna">Jaffna</option>
-              <option value="Kandy">Kandy</option>
-              <option value="Sigiriya">Sigiriya</option>
-              <option value="Ella">Ella</option>
-              <option value="Nuwara Eliya">Nuwara Eliya</option>
-              <option value="Galle / Southern Coast">Galle / South</option>
-              <option value="Other">Other Destination</option>
-            </select>
-          </div>
+        {/* STEP 1: Pickup Location (Always visible) */}
+        <div className="form-group step-from mobile-step-field visible step-visible">
+          <label>📍 Pick-up Location *</label>
+          <select name="from" value={formData.from} onChange={handleChange} required className="form-control">
+            <option value="">Select Pickup City</option>
+            <option value="Kilinochchi">Kilinochchi</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Vavuniya">Vavuniya</option>
+            <option value="Mullaitivu">Mullaitivu</option>
+            <option value="Mannar">Mannar</option>
+            <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
+            <option value="Colombo City / Fort">Colombo City</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
+            <option value="Other">Other Location</option>
+          </select>
         </div>
 
-        {/* TRANSPARENT LIVE TRIP DETAILS BOX (Mobile Order: 2 - Right below Pickup/Dropoff, Conditional Reveal) */}
-        <div className={`transparent-details-box order-details-box ${isDetailsVisible ? 'visible' : ''}`}>
+        {/* STEP 2: Drop-off Destination (Revealed after Pickup selected) */}
+        <div className={`form-group step-to mobile-step-field ${hasFrom ? 'visible step-visible' : ''}`}>
+          <label>🏁 Drop-off Destination *</label>
+          <select name="to" value={formData.to} onChange={handleChange} required className="form-control">
+            <option value="">Select Destination</option>
+            <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
+            <option value="Colombo City / Fort">Colombo City</option>
+            <option value="Kilinochchi">Kilinochchi</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Sigiriya">Sigiriya</option>
+            <option value="Ella">Ella</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Galle / Southern Coast">Galle / South</option>
+            <option value="Other">Other Destination</option>
+          </select>
+        </div>
+
+        {/* DISTANCE & TRAVEL TIME DETAILS BOX (Revealed after Dropoff selected) */}
+        <div className={`transparent-details-box mobile-step-field ${hasTo ? 'visible step-visible' : ''}`}>
           <div className="transparent-badge-header">
             <span className="transparent-badge">
               <i className="fa-solid fa-shield-halved"></i> Accurate Distance & Travel Time Details
@@ -294,7 +322,6 @@ export default function QuickBookingForm() {
             </span>
           </div>
 
-          {/* Route Visualizer */}
           <div className="transparent-route-visual">
             <div className="transparent-route-point">
               <span style={{ color: '#ef4444' }}>📍</span>
@@ -313,7 +340,6 @@ export default function QuickBookingForm() {
             </div>
           </div>
 
-          {/* Key Metrics Grid */}
           <div className="transparent-metrics-grid">
             <div className="transparent-metric-card">
               <span className="label">Exact Distance</span>
@@ -329,7 +355,6 @@ export default function QuickBookingForm() {
             </div>
           </div>
 
-          {/* Transparent Included Highlights */}
           <div className="transparent-inclusions-list">
             <div className="transparent-inclusion-item">
               <i className="fa-solid fa-circle-check"></i> <span>Driver Allowance Included</span>
@@ -346,178 +371,57 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        {/* MODE A: FULL TRIP ANALYZER VIEW (if active) */}
-        {viewMode === 'analyse' && (
-          <div className="trip-analyzer-section order-analyzer-extra">
-            <h4 style={{ fontSize: '1.1rem', color: 'var(--primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-              <i className="fa-solid fa-sliders" style={{ color: 'var(--accent)' }}></i>
-              Interactive Route & Distance Analyzer
-            </h4>
+        {/* STEP 3: Departure Date (Revealed after Dropoff selected) */}
+        <div className={`form-group step-date mobile-step-field ${hasTo ? 'visible step-visible' : ''}`}>
+          <label>📅 Departure Date *</label>
+          <input type="date" name="date" value={formData.date} onChange={handleChange} required />
+        </div>
 
-            <div className="form-row form-row-3" style={{ marginBottom: '1.25rem' }}>
-              <div className="form-group">
-                <label>📍 Pick-up City / Station</label>
-                <select name="from" value={formData.from} onChange={handleChange} className="form-control">
-                  <option value="">Select Pickup City</option>
-                  <option value="Kilinochchi">Kilinochchi</option>
-                  <option value="Jaffna">Jaffna</option>
-                  <option value="Vavuniya">Vavuniya</option>
-                  <option value="Mullaitivu">Mullaitivu</option>
-                  <option value="Mannar">Mannar</option>
-                  <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-                  <option value="Colombo City / Fort">Colombo City</option>
-                  <option value="Kandy">Kandy</option>
-                  <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
-                  <option value="Other">Other Location</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label>🏁 Drop-off Destination</label>
-                <select name="to" value={formData.to} onChange={handleChange} className="form-control">
-                  <option value="">Select Destination</option>
-                  <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-                  <option value="Colombo City / Fort">Colombo City</option>
-                  <option value="Kilinochchi">Kilinochchi</option>
-                  <option value="Jaffna">Jaffna</option>
-                  <option value="Kandy">Kandy</option>
-                  <option value="Sigiriya">Sigiriya</option>
-                  <option value="Ella">Ella</option>
-                  <option value="Nuwara Eliya">Nuwara Eliya</option>
-                  <option value="Galle / Southern Coast">Galle / South</option>
-                  <option value="Other">Other Destination</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label>👥 Group Size</label>
-                <select name="passengers" value={formData.passengers} onChange={handleChange}>
-                  <option value="1-3 Passengers">1-3 Passengers</option>
-                  <option value="4-7 Passengers">4-7 Passengers</option>
-                  <option value="8-10 Passengers">8-10 Passengers</option>
-                  <option value="11-14+ Passengers">11-14+ Passengers</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label>🚐 Preferred Vehicle</label>
-                <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
-                  <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
-                  <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
-                  <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Analysis Results Summary Box */}
-            {routeDetails ? (
-              <div style={{ background: 'var(--white)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)', marginBottom: '1.25rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', fontSize: '.88rem' }}>
-                  <div>
-                    <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🛣️ Route Highway & Road Info</strong>
-                    <p style={{ margin: 0, fontSize: '.85rem' }}>
-                      Route runs via {routeDetails.highway}. Exact distance: <strong>{routeDetails.km} km</strong>. Estimated travel duration: <strong>{routeDetails.time}</strong>.
-                    </p>
-                  </div>
-                  <div>
-                    <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🧳 Vehicle & Luggage Fit</strong>
-                    <p style={{ margin: 0, fontSize: '.85rem' }}>
-                      {formData.vehicle.includes('KDH')
-                        ? 'Spacious van ideal for groups with up to 10 large suitcases.'
-                        : 'Ideal for light luggage and comfortable group travel.'}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div style={{ textAlign: 'center', padding: '1rem', background: '#fff', borderRadius: 'var(--radius-sm)', border: '1px dashed var(--border)', marginBottom: '1.25rem', fontSize: '.88rem', color: 'var(--text-muted)' }}>
-                👈 Pick a pickup city and destination above to see the exact distance and travel time!
-              </div>
-            )}
-
-            {/* Actions */}
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a
-                href="/tours"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-                style={{ flex: 1, textAlign: 'center' }}
-              >
-                <i className="fa-solid fa-map-location-dot" style={{ color: 'var(--accent)' }}></i> Explore Tours Page 🗺️
-              </a>
-              <button
-                type="button"
-                className="btn btn-accent"
-                style={{ flex: 1 }}
-                onClick={() => setViewMode('quick')}
-              >
-                <i className="fa-solid fa-check-circle"></i> Proceed to Quick Booking
-              </button>
-              <a
-                href={`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(
-                  `Hello Sparrow Travels! 🦅\n\nI analysed my trip on your website:\n📍 From: ${formData.from || '-'}\n🏁 To: ${formData.to || '-'}\n🚐 Vehicle: ${formData.vehicle}\n👥 Group: ${formData.passengers}\n${routeDetails ? `📏 Exact Distance: ${routeDetails.km} km\n⏱️ Est. Travel Time: ${routeDetails.time}\n` : ''}Please send me a formal quotation!`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-                style={{ flex: 1, textAlign: 'center' }}
-              >
-                <i className="fa-brands fa-whatsapp" style={{ color: '#25d366' }}></i> Send WhatsApp Request
-              </a>
-            </div>
+        {/* STEP 3b: Return Date (If Return trip active, revealed after Departure Date selected) */}
+        {tripType === 'Return' && (
+          <div className={`form-group step-return-date mobile-step-field ${hasDate ? 'visible step-visible' : ''}`}>
+            <label>🔙 Return Date *</label>
+            <input type="date" name="return_date" value={formData.return_date} onChange={handleChange} required />
           </div>
         )}
 
-        {/* Row 2: Departure Date, Return Date (if Return), Passengers (Mobile Order: 3) */}
-        <div className="form-row form-row-3 order-dates-passengers">
-          <div className="form-group">
-            <label>📅 Departure Date *</label>
-            <input type="date" name="date" value={formData.date} onChange={handleChange} required />
-          </div>
-
-          {tripType === 'Return' && (
-            <div className="form-group">
-              <label>🔙 Return Date *</label>
-              <input type="date" name="return_date" value={formData.return_date} onChange={handleChange} required />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label>👥 Passengers</label>
-            <select name="passengers" value={formData.passengers} onChange={handleChange}>
-              <option value="1-3 Passengers">1-3 Passengers</option>
-              <option value="4-7 Passengers">4-7 Passengers</option>
-              <option value="8-10 Passengers">8-10 Passengers</option>
-              <option value="11-14+ Passengers">11-14+ Passengers</option>
-            </select>
-          </div>
+        {/* STEP 4: Passengers (Revealed after Date selected) */}
+        <div className={`form-group step-passengers mobile-step-field ${hasDate && hasReturnDate ? 'visible step-visible' : ''}`}>
+          <label>👥 Passengers *</label>
+          <select name="passengers" value={formData.passengers} onChange={handleChange} required className="form-control">
+            <option value="">Select Passengers</option>
+            <option value="1-3 Passengers">1-3 Passengers</option>
+            <option value="4-7 Passengers">4-7 Passengers</option>
+            <option value="8-10 Passengers">8-10 Passengers</option>
+            <option value="11-14+ Passengers">11-14+ Passengers</option>
+          </select>
         </div>
 
-        {/* Row 3: Vehicle, Name, Phone (Mobile Order: 4) */}
-        <div className="form-row form-row-3 order-vehicle-contact">
-          <div className="form-group">
-            <label>🚐 Preferred Vehicle</label>
-            <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
-              <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
-              <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
-              <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>👤 Your Name *</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
-          </div>
-
-          <div className="form-group">
-            <label>📞 Phone / WhatsApp *</label>
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required />
-          </div>
+        {/* STEP 5: Preferred Vehicle (Revealed after Passengers selected) */}
+        <div className={`form-group step-vehicle mobile-step-field ${hasPassengers ? 'visible step-visible' : ''}`}>
+          <label>🚐 Preferred Vehicle *</label>
+          <select name="vehicle" value={formData.vehicle} onChange={handleChange} required className="form-control">
+            <option value="">Select Preferred Vehicle</option>
+            <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
+            <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
+            <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
+          </select>
         </div>
 
-        {/* Submit Button (Mobile Order: 7) */}
-        <div className="order-submit-btn">
+        {/* STEP 6: Your Name (Revealed after Vehicle selected) */}
+        <div className={`form-group step-name mobile-step-field ${hasVehicle ? 'visible step-visible' : ''}`}>
+          <label>👤 Your Name *</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
+        </div>
+
+        {/* STEP 7: Phone / WhatsApp (Revealed after Name filled) */}
+        <div className={`form-group step-phone mobile-step-field ${hasName ? 'visible step-visible' : ''}`}>
+          <label>📞 Phone / WhatsApp *</label>
+          <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required />
+        </div>
+
+        {/* STEP 8: Submit Button (Revealed after Phone filled) */}
+        <div className={`step-submit-btn mobile-step-field ${hasPhone ? 'visible step-visible' : ''}`}>
           <button type="submit" className="btn btn-accent btn-full btn-lg" style={{ marginTop: '.5rem' }}>
             <i className="fa-brands fa-whatsapp"></i> Instant WhatsApp Quote & Quick Booking
           </button>
@@ -526,3 +430,4 @@ export default function QuickBookingForm() {
     </div>
   );
 }
+

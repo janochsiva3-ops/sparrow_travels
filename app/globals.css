@@ -849,47 +849,48 @@ p  { color: var(--text-muted); line-height: 1.7; }
   .booking-layout { grid-template-columns: 1fr !important; gap: 1.5rem; }
   .booking-page-form, .quick-booking-card { padding: 1.25rem 1rem; border-radius: var(--radius-md); }
 
-  /* Mobile Flex Reordering */
+  /* Mobile Flex Reordering (Toggles at TOP) */
   .quick-booking-form-wrap {
     display: flex !important;
     flex-direction: column !important;
   }
-  .order-locations        { order: 1 !important; } /* Pickup Location & Dropoff FIRST */
-  .order-details-box      { order: 2 !important; } /* Distance & Travel Time Details RIGHT BELOW Pickup & Dropoff */
-  .order-dates-passengers { order: 3 !important; } /* Departure Date, Return Date, Passengers */
-  .order-vehicle-contact  { order: 4 !important; } /* Vehicle, Name, Phone/WhatsApp */
-  .order-analyzer-extra   { order: 5 !important; } /* Interactive Analyzer extra */
-  .order-mode-switcher    { order: 6 !important; } /* Quick Booking / Analyse Trip toggle AFTER fields */
-  .order-trip-type        { order: 7 !important; } /* One-Way / Return Trip toggle AFTER fields, just above button */
-  .order-submit-btn       { order: 8 !important; } /* Submit button at bottom */
 
-  /* Conditional Display of Distance Details Box on Mobile (< 768px) */
-  .transparent-details-box {
+  /* Progressive Field Reveal for Mobile View (< 768px) */
+  .mobile-step-field {
     max-height: 0 !important;
     opacity: 0 !important;
     overflow: hidden !important;
-    padding-block: 0 !important;
-    padding-inline: 1.4rem !important;
     margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     border-width: 0 !important;
-    border-color: transparent !important;
     pointer-events: none !important;
-    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.35s ease,
-                margin-bottom 0.35s ease,
-                padding 0.35s ease,
-                border-width 0.35s ease !important;
+    visibility: hidden !important;
+    transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 300ms ease,
+                margin-bottom 300ms ease,
+                padding 300ms ease,
+                visibility 300ms ease !important;
   }
 
-  .transparent-details-box.visible {
-    max-height: 1200px !important;
+  .mobile-step-field.visible,
+  .mobile-step-field.step-visible {
+    max-height: 800px !important;
     opacity: 1 !important;
+    overflow: visible !important;
+    margin-bottom: 1rem !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+  }
+
+  /* Distance Details Box expansion when visible on Mobile (< 768px) */
+  .transparent-details-box.mobile-step-field.visible,
+  .transparent-details-box.mobile-step-field.step-visible {
     padding-block: 1.25rem !important;
     padding-inline: 1.4rem !important;
     margin-bottom: 1.25rem !important;
     border-width: 1.5px !important;
     border-color: rgba(232, 168, 0, 0.35) !important;
-    pointer-events: auto !important;
   }
 
   /* Toggle button rows: side-by-side in a single row without cutoff */
