@@ -741,10 +741,74 @@ p  { color: var(--text-muted); line-height: 1.7; }
     margin-top: 1rem !important;
   }
   
+  /* Why Choose Us Horizontal Touch Scroll Row (< 768px) */
+  #why-us .why-us-grid,
+  .why-us-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 14px !important;
+    padding-bottom: 1rem !important;
+    padding-top: 0.5rem !important;
+    padding-inline: 0.25rem !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+  }
+
+  #why-us .why-us-grid::-webkit-scrollbar,
+  .why-us-grid::-webkit-scrollbar {
+    display: none !important; /* Webkit / Chrome / Safari */
+  }
+
+  #why-us .why-us-grid .feature-card,
+  .why-us-grid .feature-card {
+    flex: 0 0 160px !important;
+    width: 160px !important;
+    min-width: 150px !important;
+    max-width: 175px !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+    padding: 1.1rem 0.85rem !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--white) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow-sm) !important;
+    text-align: center !important;
+  }
+
+  #why-us .why-us-grid .feature-icon,
+  .why-us-grid .feature-icon {
+    width: 46px !important;
+    height: 46px !important;
+    font-size: 1.35rem !important;
+    margin: 0 auto 0.75rem auto !important;
+    border-radius: var(--radius-sm) !important;
+  }
+
+  #why-us .why-us-grid .feature-card h4,
+  .why-us-grid .feature-card h4 {
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.35rem !important;
+    line-height: 1.25 !important;
+    color: var(--primary) !important;
+  }
+
+  #why-us .why-us-grid .feature-card p,
+  .why-us-grid .feature-card p {
+    font-size: 0.76rem !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+    color: var(--text-muted) !important;
+  }
+
   .section { padding-block: 50px; }
   
   /* Cards Responsive Padding & Transform Safety */
-  .feature-card, .pricing-card, .vehicle-body, .card-body, .stat-card { padding: 1.25rem; }
+  .feature-card:not(.why-us-grid .feature-card), .pricing-card, .vehicle-body, .card-body, .stat-card { padding: 1.25rem; }
   .pricing-card.featured { transform: none !important; margin: 0; box-shadow: var(--shadow-md); }
   
   /* Buttons Stacking & Touch Targets */

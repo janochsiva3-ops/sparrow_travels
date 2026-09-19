@@ -161,7 +161,7 @@ export default function HomePage() {
             <div className="divider"></div>
           </div>
 
-          <div className="grid-4">
+          <div className="grid-4 why-us-grid">
             <div className="feature-card">
               <div className="feature-icon">🚐</div>
               <h4>Modern Fleet</h4>
