@@ -1,7 +1,23 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Footer() {
+  const [openSections, setOpenSections] = useState({
+    pages: false,
+    destinations: false,
+    contact: false,
+  });
+
+  const toggleSection = (sectionKey) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey],
+    }));
+  };
+
   return (
     <footer className="footer">
       <div className="container footer-grid">
@@ -40,41 +56,94 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="footer-col">
-          <h5>Pages</h5>
-          <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/vehicles">Vehicles</Link></li>
-            <li><Link href="/tours">Tours</Link></li>
-            <li><Link href="/#pricing">Trip Pricing</Link></li>
-            <li><Link href="/booking">Book a Trip</Link></li>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-          </ul>
+        <div className={`footer-col ${openSections.pages ? 'open' : ''}`}>
+          <h5
+            className="footer-heading"
+            onClick={() => toggleSection('pages')}
+            role="button"
+            tabIndex={0}
+            aria-expanded={openSections.pages}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection('pages');
+              }
+            }}
+          >
+            <span>Pages</span>
+            <i className="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
+          </h5>
+          <div className="footer-col-content">
+            <ul className="footer-col-content-inner">
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/vehicles">Vehicles</Link></li>
+              <li><Link href="/tours">Tours</Link></li>
+              <li><Link href="/#pricing">Trip Pricing</Link></li>
+              <li><Link href="/booking">Book a Trip</Link></li>
+              <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
+            </ul>
+          </div>
         </div>
 
-        <div className="footer-col">
-          <h5>Destinations</h5>
-          <ul>
-            <li><Link href="/tours">Sigiriya</Link></li>
-            <li><Link href="/tours">Kandy</Link></li>
-            <li><Link href="/tours">Ella</Link></li>
-            <li><Link href="/tours">Galle</Link></li>
-            <li><Link href="/tours">Yala</Link></li>
-            <li><Link href="/tours">Jaffna</Link></li>
-          </ul>
+        <div className={`footer-col ${openSections.destinations ? 'open' : ''}`}>
+          <h5
+            className="footer-heading"
+            onClick={() => toggleSection('destinations')}
+            role="button"
+            tabIndex={0}
+            aria-expanded={openSections.destinations}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection('destinations');
+              }
+            }}
+          >
+            <span>Destinations</span>
+            <i className="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
+          </h5>
+          <div className="footer-col-content">
+            <ul className="footer-col-content-inner">
+              <li><Link href="/tours">Sigiriya</Link></li>
+              <li><Link href="/tours">Kandy</Link></li>
+              <li><Link href="/tours">Ella</Link></li>
+              <li><Link href="/tours">Galle</Link></li>
+              <li><Link href="/tours">Yala</Link></li>
+              <li><Link href="/tours">Jaffna</Link></li>
+            </ul>
+          </div>
         </div>
 
-        <div className="footer-col">
-          <h5>Contact Us</h5>
-          <p><a href="tel:0754013974" className="footer-location-link">📞 0754013974</a></p>
-          <p style={{ marginTop: '.5rem' }}><a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="footer-location-link">📱 WhatsApp: 0754013974 (24/7)</a></p>
-          <p style={{ marginTop: '.5rem' }}><a href="mailto:sparrowtravels.kili@gmail.com" className="footer-location-link">📧 sparrowtravels.kili@gmail.com</a></p>
-          <p style={{ marginTop: '.5rem' }}>
-            <a href="https://maps.app.goo.gl/t8DpiuYnVThozSy17" target="_blank" rel="noopener noreferrer" className="footer-location-link">
-              📍 Kilinochchi & Northern Province, Sri Lanka (View Map)
-            </a>
-          </p>
+        <div className={`footer-col ${openSections.contact ? 'open' : ''}`}>
+          <h5
+            className="footer-heading"
+            onClick={() => toggleSection('contact')}
+            role="button"
+            tabIndex={0}
+            aria-expanded={openSections.contact}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection('contact');
+              }
+            }}
+          >
+            <span>Contact Us</span>
+            <i className="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
+          </h5>
+          <div className="footer-col-content">
+            <div className="footer-col-content-inner">
+              <p><a href="tel:0754013974" className="footer-location-link">📞 0754013974</a></p>
+              <p style={{ marginTop: '.5rem' }}><a href="https://wa.me/94754013974" target="_blank" rel="noopener noreferrer" className="footer-location-link">📱 WhatsApp: 0754013974 (24/7)</a></p>
+              <p style={{ marginTop: '.5rem' }}><a href="mailto:sparrowtravels.kili@gmail.com" className="footer-location-link">📧 sparrowtravels.kili@gmail.com</a></p>
+              <p style={{ marginTop: '.5rem' }}>
+                <a href="https://maps.app.goo.gl/t8DpiuYnVThozSy17" target="_blank" rel="noopener noreferrer" className="footer-location-link">
+                  📍 Kilinochchi & Northern Province, Sri Lanka (View Map)
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
