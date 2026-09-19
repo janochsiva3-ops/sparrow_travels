@@ -140,8 +140,8 @@ export default function QuickBookingForm() {
     to: '',
     date: '',
     return_date: '',
-    passengers: '',
-    vehicle: '',
+    passengers: '1-3 Passengers',
+    vehicle: 'Toyota KDH Van',
     name: '',
     phone: '',
   });
@@ -275,43 +275,7 @@ export default function QuickBookingForm() {
           </button>
         </div>
 
-        {/* STEP 1: Pickup Location (Always visible) */}
-        <div className="form-group step-from mobile-step-field visible step-visible">
-          <label>📍 Pick-up Location *</label>
-          <select name="from" value={formData.from} onChange={handleChange} required className="form-control">
-            <option value="">Select Pickup City</option>
-            <option value="Kilinochchi">Kilinochchi</option>
-            <option value="Jaffna">Jaffna</option>
-            <option value="Vavuniya">Vavuniya</option>
-            <option value="Mullaitivu">Mullaitivu</option>
-            <option value="Mannar">Mannar</option>
-            <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-            <option value="Colombo City / Fort">Colombo City</option>
-            <option value="Kandy">Kandy</option>
-            <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
-            <option value="Other">Other Location</option>
-          </select>
-        </div>
-
-        {/* STEP 2: Drop-off Destination (Revealed after Pickup selected) */}
-        <div className={`form-group step-to mobile-step-field ${hasFrom ? 'visible step-visible' : ''}`}>
-          <label>🏁 Drop-off Destination *</label>
-          <select name="to" value={formData.to} onChange={handleChange} required className="form-control">
-            <option value="">Select Destination</option>
-            <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-            <option value="Colombo City / Fort">Colombo City</option>
-            <option value="Kilinochchi">Kilinochchi</option>
-            <option value="Jaffna">Jaffna</option>
-            <option value="Kandy">Kandy</option>
-            <option value="Sigiriya">Sigiriya</option>
-            <option value="Ella">Ella</option>
-            <option value="Nuwara Eliya">Nuwara Eliya</option>
-            <option value="Galle / Southern Coast">Galle / South</option>
-            <option value="Other">Other Destination</option>
-          </select>
-        </div>
-
-        {/* DISTANCE & TRAVEL TIME DETAILS BOX (Revealed after Dropoff selected) */}
+        {/* DISTANCE & TRAVEL TIME DETAILS BOX */}
         <div className={`transparent-details-box mobile-step-field ${hasTo ? 'visible step-visible' : ''}`}>
           <div className="transparent-badge-header">
             <span className="transparent-badge">
@@ -371,60 +335,106 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        {/* STEP 3: Departure Date (Revealed after Dropoff selected) */}
-        <div className={`form-group step-date mobile-step-field ${hasTo ? 'visible step-visible' : ''}`}>
-          <label>📅 Departure Date *</label>
-          <input type="date" name="date" value={formData.date} onChange={handleChange} required />
-        </div>
-
-        {/* STEP 3b: Return Date (If Return trip active, revealed after Departure Date selected) */}
-        {tripType === 'Return' && (
-          <div className={`form-group step-return-date mobile-step-field ${hasDate ? 'visible step-visible' : ''}`}>
-            <label>🔙 Return Date *</label>
-            <input type="date" name="return_date" value={formData.return_date} onChange={handleChange} required />
+        {/* ROW 1: Route Fields (Pickup & Drop-off) */}
+        <div className="form-row">
+          {/* STEP 1: Pickup Location */}
+          <div className="form-group step-from mobile-step-field visible step-visible">
+            <label>📍 Pick-up Location *</label>
+            <select name="from" value={formData.from} onChange={handleChange} required className="form-control">
+              <option value="">Select Pickup City</option>
+              <option value="Kilinochchi">Kilinochchi</option>
+              <option value="Jaffna">Jaffna</option>
+              <option value="Vavuniya">Vavuniya</option>
+              <option value="Mullaitivu">Mullaitivu</option>
+              <option value="Mannar">Mannar</option>
+              <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
+              <option value="Colombo City / Fort">Colombo City</option>
+              <option value="Kandy">Kandy</option>
+              <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
+              <option value="Other">Other Location</option>
+            </select>
           </div>
-        )}
 
-        {/* STEP 4: Passengers (Revealed after Date selected) */}
-        <div className={`form-group step-passengers mobile-step-field ${hasDate && hasReturnDate ? 'visible step-visible' : ''}`}>
-          <label>👥 Passengers *</label>
-          <select name="passengers" value={formData.passengers} onChange={handleChange} required className="form-control">
-            <option value="">Select Passengers</option>
-            <option value="1-3 Passengers">1-3 Passengers</option>
-            <option value="4-7 Passengers">4-7 Passengers</option>
-            <option value="8-10 Passengers">8-10 Passengers</option>
-            <option value="11-14+ Passengers">11-14+ Passengers</option>
-          </select>
+          {/* STEP 2: Drop-off Destination */}
+          <div className={`form-group step-to mobile-step-field ${hasFrom ? 'visible step-visible' : ''}`}>
+            <label>🏁 Drop-off Destination *</label>
+            <select name="to" value={formData.to} onChange={handleChange} required className="form-control">
+              <option value="">Select Destination</option>
+              <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
+              <option value="Colombo City / Fort">Colombo City</option>
+              <option value="Kilinochchi">Kilinochchi</option>
+              <option value="Jaffna">Jaffna</option>
+              <option value="Kandy">Kandy</option>
+              <option value="Sigiriya">Sigiriya</option>
+              <option value="Ella">Ella</option>
+              <option value="Nuwara Eliya">Nuwara Eliya</option>
+              <option value="Galle / Southern Coast">Galle / South</option>
+              <option value="Other">Other Destination</option>
+            </select>
+          </div>
         </div>
 
-        {/* STEP 5: Preferred Vehicle (Revealed after Passengers selected) */}
-        <div className={`form-group step-vehicle mobile-step-field ${hasPassengers ? 'visible step-visible' : ''}`}>
-          <label>🚐 Preferred Vehicle *</label>
-          <select name="vehicle" value={formData.vehicle} onChange={handleChange} required className="form-control">
-            <option value="">Select Preferred Vehicle</option>
-            <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
-            <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
-            <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
-          </select>
+        {/* ROW 2: Departure Date, Return Date, Passengers */}
+        <div className="form-row">
+          {/* STEP 3: Departure Date */}
+          <div className={`form-group step-date mobile-step-field ${hasTo ? 'visible step-visible' : ''}`}>
+            <label>📅 Departure Date *</label>
+            <input type="date" name="date" value={formData.date} onChange={handleChange} required />
+          </div>
+
+          {/* STEP 3b: Return Date (If Return trip active) */}
+          {tripType === 'Return' && (
+            <div className={`form-group step-return-date mobile-step-field ${hasDate ? 'visible step-visible' : ''}`}>
+              <label>🔙 Return Date *</label>
+              <input type="date" name="return_date" value={formData.return_date} onChange={handleChange} required />
+            </div>
+          )}
+
+          {/* STEP 4: Passengers */}
+          <div className={`form-group step-passengers mobile-step-field ${hasDate && hasReturnDate ? 'visible step-visible' : ''}`}>
+            <label>👥 Passengers *</label>
+            <select name="passengers" value={formData.passengers} onChange={handleChange} required className="form-control">
+              <option value="1-3 Passengers">1-3 Passengers</option>
+              <option value="4-7 Passengers">4-7 Passengers</option>
+              <option value="8-10 Passengers">8-10 Passengers</option>
+              <option value="11-14+ Passengers">11-14+ Passengers</option>
+            </select>
+          </div>
         </div>
 
-        {/* STEP 6: Your Name (Revealed after Vehicle selected) */}
-        <div className={`form-group step-name mobile-step-field ${hasVehicle ? 'visible step-visible' : ''}`}>
-          <label>👤 Your Name *</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
+        {/* ROW 3: Preferred Vehicle & Your Name */}
+        <div className="form-row">
+          {/* STEP 5: Preferred Vehicle */}
+          <div className={`form-group step-vehicle mobile-step-field ${hasPassengers ? 'visible step-visible' : ''}`}>
+            <label>🚐 Preferred Vehicle *</label>
+            <select name="vehicle" value={formData.vehicle} onChange={handleChange} required className="form-control">
+              <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
+              <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
+              <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
+            </select>
+          </div>
+
+          {/* STEP 6: Your Name */}
+          <div className={`form-group step-name mobile-step-field ${hasVehicle ? 'visible step-visible' : ''}`}>
+            <label>👤 Your Name *</label>
+            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
+          </div>
         </div>
 
-        {/* STEP 7: Phone / WhatsApp (Revealed after Name filled) */}
-        <div className={`form-group step-phone mobile-step-field ${hasName ? 'visible step-visible' : ''}`}>
-          <label>📞 Phone / WhatsApp *</label>
-          <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required />
-        </div>
+        {/* ROW 4: Phone & Submit Button */}
+        <div className="form-row">
+          {/* STEP 7: Phone / WhatsApp */}
+          <div className={`form-group step-phone mobile-step-field ${hasName ? 'visible step-visible' : ''}`}>
+            <label>📞 Phone / WhatsApp *</label>
+            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required />
+          </div>
 
-        {/* STEP 8: Submit Button (Revealed after Phone filled) */}
-        <div className={`step-submit-btn mobile-step-field ${hasPhone ? 'visible step-visible' : ''}`}>
-          <button type="submit" className="btn btn-accent btn-full btn-lg" style={{ marginTop: '.5rem' }}>
-            <i className="fa-brands fa-whatsapp"></i> Instant WhatsApp Quote & Quick Booking
-          </button>
+          {/* STEP 8: Submit Button */}
+          <div className={`step-submit-btn mobile-step-field ${hasPhone ? 'visible step-visible' : ''}`} style={{ alignSelf: 'flex-end' }}>
+            <button type="submit" className="btn btn-accent btn-full btn-lg">
+              <i className="fa-brands fa-whatsapp"></i> Instant WhatsApp Quote & Quick Booking
+            </button>
+          </div>
         </div>
       </form>
     </div>
