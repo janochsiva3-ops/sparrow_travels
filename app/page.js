@@ -114,39 +114,39 @@ export default function HomePage() {
           </div>
 
           <div className="dest-grid">
-            <div className="dest-card">
+            <Link href="/tours" className="dest-card">
               <Image src="/images/sigiriya.png" alt="Sigiriya" width={400} height={300} style={{ objectFit: 'cover' }} />
               <div className="dest-overlay">
                 <h3>Sigiriya</h3>
                 <p>The 8th Wonder of the World</p>
               </div>
-            </div>
-            <div className="dest-card">
+            </Link>
+            <Link href="/tours" className="dest-card">
               <Image src="/images/ella.png" alt="Ella" width={400} height={300} style={{ objectFit: 'cover' }} />
               <div className="dest-overlay">
                 <h3>Ella</h3>
                 <p>Scenic hills & Nine Arch Bridge</p>
               </div>
-            </div>
-            <div className="dest-card">
+            </Link>
+            <Link href="/tours" className="dest-card">
               <Image src="/images/kandy.png" alt="Kandy" width={400} height={300} style={{ objectFit: 'cover' }} />
               <div className="dest-overlay">
                 <h3>Kandy</h3>
                 <p>Cultural capital of Sri Lanka</p>
               </div>
-            </div>
-            <div className="dest-card">
+            </Link>
+            <Link href="/tours" className="dest-card">
               <Image src="/images/galle.png" alt="Galle" width={400} height={300} style={{ objectFit: 'cover' }} />
               <div className="dest-overlay">
                 <h3>Galle</h3>
                 <p>Historic Dutch colonial fort</p>
               </div>
-            </div>
+            </Link>
           </div>
 
           <div className="text-center mt-4">
-            <Link href="/tours" className="btn btn-outline">
-              View All Destinations <i className="fa-solid fa-arrow-right"></i>
+            <Link href="/tours" className="btn btn-outline dest-view-all-btn">
+              View All Destinations <i className="fa-solid fa-arrow-right" style={{ marginLeft: '.4rem' }}></i>
             </Link>
           </div>
         </div>
