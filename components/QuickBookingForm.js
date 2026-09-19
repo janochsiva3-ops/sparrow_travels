@@ -249,7 +249,7 @@ export default function QuickBookingForm() {
           <span className="transparent-badge">
             <i className="fa-solid fa-shield-halved"></i> Accurate Distance & Travel Time Details
           </span>
-          <span style={{ fontSize: '.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+          <span className="transparent-badge-note">
             {formData.from && formData.to ? '⚡ Live Route Calculation' : 'ℹ️ Select Pickup & Dropoff for Live Calculation'}
           </span>
         </div>
@@ -261,9 +261,9 @@ export default function QuickBookingForm() {
             <span>{formData.from || 'Select Pickup'}</span>
           </div>
           <div className="transparent-route-arrow">
-            <span>{routeDetails ? `${routeDetails.km} km` : '---'}</span>
-            <i className="fa-solid fa-arrow-right-long" style={{ fontSize: '1.1rem' }}></i>
-            <span style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>
+            <span className="route-arrow-km">{routeDetails ? `${routeDetails.km} km` : '---'}</span>
+            <i className="fa-solid fa-arrow-right-long route-arrow-icon"></i>
+            <span className="route-arrow-highway">
               {routeDetails ? routeDetails.highway : 'Direct Route'}
             </span>
           </div>
@@ -285,23 +285,23 @@ export default function QuickBookingForm() {
           </div>
           <div className="transparent-metric-card">
             <span className="label">Vehicle Class</span>
-            <span className="value" style={{ fontSize: '.9rem' }}>{formData.vehicle.split(' ')[0]} {formData.vehicle.split(' ')[1]}</span>
+            <span className="value">{formData.vehicle ? formData.vehicle.split(' ').slice(0, 2).join(' ') : 'Toyota KDH'}</span>
           </div>
         </div>
 
         {/* Transparent Included Highlights */}
         <div className="transparent-inclusions-list">
           <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> Driver Allowance Included
+            <i className="fa-solid fa-circle-check"></i> <span>Driver Allowance Included</span>
           </div>
           <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> Air Conditioned Comfort
+            <i className="fa-solid fa-circle-check"></i> <span>Air Conditioned Comfort</span>
           </div>
           <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> Fuel & Express Tolls
+            <i className="fa-solid fa-circle-check"></i> <span>Fuel & Express Tolls</span>
           </div>
           <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> 0 Hidden Extra Fees
+            <i className="fa-solid fa-circle-check"></i> <span>0 Hidden Extra Fees</span>
           </div>
         </div>
       </div>
@@ -314,9 +314,9 @@ export default function QuickBookingForm() {
             Interactive Route & Distance Analyzer
           </h4>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>📍 Pick-up City / Station</label>
+          <div className="form-row form-row-3" style={{ marginBottom: '1.25rem' }}>
+            <div className="form-group">
+              <label>📍 Pick-up City / Station</label>
               <select name="from" value={formData.from} onChange={handleChange} className="form-control">
                 <option value="">Select Pickup City</option>
                 <option value="Kilinochchi">Kilinochchi</option>
@@ -332,8 +332,8 @@ export default function QuickBookingForm() {
               </select>
             </div>
 
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🏁 Drop-off Destination</label>
+            <div className="form-group">
+              <label>🏁 Drop-off Destination</label>
               <select name="to" value={formData.to} onChange={handleChange} className="form-control">
                 <option value="">Select Destination</option>
                 <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
@@ -349,8 +349,8 @@ export default function QuickBookingForm() {
               </select>
             </div>
 
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>👥 Group Size</label>
+            <div className="form-group">
+              <label>👥 Group Size</label>
               <select name="passengers" value={formData.passengers} onChange={handleChange}>
                 <option value="1-3 Passengers">1-3 Passengers</option>
                 <option value="4-7 Passengers">4-7 Passengers</option>
@@ -359,8 +359,8 @@ export default function QuickBookingForm() {
               </select>
             </div>
 
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🚐 Preferred Vehicle</label>
+            <div className="form-group">
+              <label>🚐 Preferred Vehicle</label>
               <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
                 <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
                 <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
@@ -431,10 +431,11 @@ export default function QuickBookingForm() {
 
       {/* MODE B: STREAMLINED QUICK BOOKING FORM */}
       <form onSubmit={handleSubmit}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>📍 Pick-up Location *</label>
-            <select name="from" value={formData.from} onChange={handleChange} required className="form-control" style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+        {/* Row 1: Pickup & Dropoff */}
+        <div className="form-row">
+          <div className="form-group">
+            <label>📍 Pick-up Location *</label>
+            <select name="from" value={formData.from} onChange={handleChange} required className="form-control">
               <option value="">Select Pickup City</option>
               <option value="Kilinochchi">Kilinochchi</option>
               <option value="Jaffna">Jaffna</option>
@@ -449,9 +450,9 @@ export default function QuickBookingForm() {
             </select>
           </div>
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🏁 Drop-off Destination *</label>
-            <select name="to" value={formData.to} onChange={handleChange} required className="form-control" style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+          <div className="form-group">
+            <label>🏁 Drop-off Destination *</label>
+            <select name="to" value={formData.to} onChange={handleChange} required className="form-control">
               <option value="">Select Destination</option>
               <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
               <option value="Colombo City / Fort">Colombo City</option>
@@ -467,22 +468,23 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>📅 Departure Date *</label>
-            <input type="date" name="date" value={formData.date} onChange={handleChange} required style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+        {/* Row 2: Departure Date, Return Date (if Return), Passengers */}
+        <div className="form-row form-row-3">
+          <div className="form-group">
+            <label>📅 Departure Date *</label>
+            <input type="date" name="date" value={formData.date} onChange={handleChange} required />
           </div>
 
           {tripType === 'Return' && (
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🔙 Return Date *</label>
-              <input type="date" name="return_date" value={formData.return_date} onChange={handleChange} required style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+            <div className="form-group">
+              <label>🔙 Return Date *</label>
+              <input type="date" name="return_date" value={formData.return_date} onChange={handleChange} required />
             </div>
           )}
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>👥 Passengers</label>
-            <select name="passengers" value={formData.passengers} onChange={handleChange} style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+          <div className="form-group">
+            <label>👥 Passengers</label>
+            <select name="passengers" value={formData.passengers} onChange={handleChange}>
               <option value="1-3 Passengers">1-3 Passengers</option>
               <option value="4-7 Passengers">4-7 Passengers</option>
               <option value="8-10 Passengers">8-10 Passengers</option>
@@ -491,24 +493,25 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>🚐 Preferred Vehicle</label>
-            <select name="vehicle" value={formData.vehicle} onChange={handleChange} style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+        {/* Row 3: Vehicle, Name, Phone */}
+        <div className="form-row form-row-3">
+          <div className="form-group">
+            <label>🚐 Preferred Vehicle</label>
+            <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
               <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
               <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
               <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
             </select>
           </div>
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>👤 Your Name *</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+          <div className="form-group">
+            <label>👤 Your Name *</label>
+            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
           </div>
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--primary)' }}>📞 Phone / WhatsApp *</label>
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required style={{ width: '100%', padding: '.65rem .85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+          <div className="form-group">
+            <label>📞 Phone / WhatsApp *</label>
+            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0754013974" required />
           </div>
         </div>
 
