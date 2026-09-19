@@ -194,10 +194,12 @@ export default function QuickBookingForm() {
     window.open(`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  const isDetailsVisible = Boolean(formData.from && formData.to);
+
   return (
     <div className="quick-booking-card">
       {/* Header Title & Subtitle */}
-      <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
+      <div className="quick-booking-header" style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
         <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '.35rem' }}>
           <i className="fa-solid fa-van-shuttle" style={{ color: 'var(--accent)', marginRight: '.5rem' }}></i>
           Trip Booking & Route Analyzer
@@ -207,232 +209,45 @@ export default function QuickBookingForm() {
         </p>
       </div>
 
-      {/* Mode Switcher Tabs: Quick Booking vs Analyse Your Trip */}
-      <div className="mode-switcher-container">
-        <button
-          type="button"
-          className={`mode-switcher-btn ${viewMode === 'quick' ? 'active' : ''}`}
-          onClick={() => setViewMode('quick')}
-        >
-          <i className="fa-solid fa-bolt"></i> Quick Booking
-        </button>
-        <button
-          type="button"
-          className={`mode-switcher-btn ${viewMode === 'analyse' ? 'active' : ''}`}
-          onClick={handleAnalyseClick}
-        >
-          <i className="fa-solid fa-chart-pie"></i> Analyse Your Trip & Tours 🗺️
-        </button>
-      </div>
-
-      {/* Trip Type Selector (One-Way / Return) */}
-      <div className="trip-type-wrapper" style={{ marginBottom: '1.25rem' }}>
-        <button
-          type="button"
-          className={`trip-type-btn ${tripType === 'One-Way' ? 'active' : ''}`}
-          onClick={() => setTripType('One-Way')}
-        >
-          <i className="fa-solid fa-arrow-right"></i> One-Way Trip
-        </button>
-        <button
-          type="button"
-          className={`trip-type-btn ${tripType === 'Return' ? 'active' : ''}`}
-          onClick={() => setTripType('Return')}
-        >
-          <i className="fa-solid fa-arrow-right-arrow-left"></i> Return Trip
-        </button>
-      </div>
-
-      {/* TRANSPARENT LIVE TRIP DETAILS BOX */}
-      <div className="transparent-details-box">
-        <div className="transparent-badge-header">
-          <span className="transparent-badge">
-            <i className="fa-solid fa-shield-halved"></i> Accurate Distance & Travel Time Details
-          </span>
-          <span className="transparent-badge-note">
-            {formData.from && formData.to ? '⚡ Live Route Calculation' : 'ℹ️ Select Pickup & Dropoff for Live Calculation'}
-          </span>
+      <form onSubmit={handleSubmit} className="quick-booking-form-wrap">
+        {/* Mode Switcher Tabs: Quick Booking vs Analyse Your Trip */}
+        <div className="mode-switcher-container order-mode-switcher">
+          <button
+            type="button"
+            className={`mode-switcher-btn ${viewMode === 'quick' ? 'active' : ''}`}
+            onClick={() => setViewMode('quick')}
+          >
+            <i className="fa-solid fa-bolt"></i> Quick Booking
+          </button>
+          <button
+            type="button"
+            className={`mode-switcher-btn ${viewMode === 'analyse' ? 'active' : ''}`}
+            onClick={handleAnalyseClick}
+          >
+            <i className="fa-solid fa-chart-pie"></i> Analyse Your Trip & Tours 🗺️
+          </button>
         </div>
 
-        {/* Route Visualizer */}
-        <div className="transparent-route-visual">
-          <div className="transparent-route-point">
-            <span style={{ color: '#ef4444' }}>📍</span>
-            <span>{formData.from || 'Select Pickup'}</span>
-          </div>
-          <div className="transparent-route-arrow">
-            <span className="route-arrow-km">{routeDetails ? `${routeDetails.km} km` : '---'}</span>
-            <i className="fa-solid fa-arrow-right-long route-arrow-icon"></i>
-            <span className="route-arrow-highway">
-              {routeDetails ? routeDetails.highway : 'Direct Route'}
-            </span>
-          </div>
-          <div className="transparent-route-point">
-            <span style={{ color: '#10b981' }}>🏁</span>
-            <span>{formData.to || 'Select Destination'}</span>
-          </div>
+        {/* Trip Type Selector (One-Way / Return) */}
+        <div className="trip-type-wrapper order-trip-type" style={{ marginBottom: '1.25rem' }}>
+          <button
+            type="button"
+            className={`trip-type-btn ${tripType === 'One-Way' ? 'active' : ''}`}
+            onClick={() => setTripType('One-Way')}
+          >
+            <i className="fa-solid fa-arrow-right"></i> One-Way Trip
+          </button>
+          <button
+            type="button"
+            className={`trip-type-btn ${tripType === 'Return' ? 'active' : ''}`}
+            onClick={() => setTripType('Return')}
+          >
+            <i className="fa-solid fa-arrow-right-arrow-left"></i> Return Trip
+          </button>
         </div>
 
-        {/* Key Metrics Grid */}
-        <div className="transparent-metrics-grid">
-          <div className="transparent-metric-card">
-            <span className="label">Exact Distance</span>
-            <span className="value">{routeDetails ? `${routeDetails.km} km` : '-'}</span>
-          </div>
-          <div className="transparent-metric-card">
-            <span className="label">Est. Travel Time</span>
-            <span className="value">{routeDetails ? routeDetails.time : '-'}</span>
-          </div>
-          <div className="transparent-metric-card">
-            <span className="label">Vehicle Class</span>
-            <span className="value">{formData.vehicle ? formData.vehicle.split(' ').slice(0, 2).join(' ') : 'Toyota KDH'}</span>
-          </div>
-        </div>
-
-        {/* Transparent Included Highlights */}
-        <div className="transparent-inclusions-list">
-          <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> <span>Driver Allowance Included</span>
-          </div>
-          <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> <span>Air Conditioned Comfort</span>
-          </div>
-          <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> <span>Fuel & Express Tolls</span>
-          </div>
-          <div className="transparent-inclusion-item">
-            <i className="fa-solid fa-circle-check"></i> <span>0 Hidden Extra Fees</span>
-          </div>
-        </div>
-      </div>
-
-      {/* MODE A: FULL TRIP ANALYZER VIEW */}
-      {viewMode === 'analyse' && (
-        <div className="trip-analyzer-section">
-          <h4 style={{ fontSize: '1.1rem', color: 'var(--primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-            <i className="fa-solid fa-sliders" style={{ color: 'var(--accent)' }}></i>
-            Interactive Route & Distance Analyzer
-          </h4>
-
-          <div className="form-row form-row-3" style={{ marginBottom: '1.25rem' }}>
-            <div className="form-group">
-              <label>📍 Pick-up City / Station</label>
-              <select name="from" value={formData.from} onChange={handleChange} className="form-control">
-                <option value="">Select Pickup City</option>
-                <option value="Kilinochchi">Kilinochchi</option>
-                <option value="Jaffna">Jaffna</option>
-                <option value="Vavuniya">Vavuniya</option>
-                <option value="Mullaitivu">Mullaitivu</option>
-                <option value="Mannar">Mannar</option>
-                <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-                <option value="Colombo City / Fort">Colombo City</option>
-                <option value="Kandy">Kandy</option>
-                <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
-                <option value="Other">Other Location</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>🏁 Drop-off Destination</label>
-              <select name="to" value={formData.to} onChange={handleChange} className="form-control">
-                <option value="">Select Destination</option>
-                <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
-                <option value="Colombo City / Fort">Colombo City</option>
-                <option value="Kilinochchi">Kilinochchi</option>
-                <option value="Jaffna">Jaffna</option>
-                <option value="Kandy">Kandy</option>
-                <option value="Sigiriya">Sigiriya</option>
-                <option value="Ella">Ella</option>
-                <option value="Nuwara Eliya">Nuwara Eliya</option>
-                <option value="Galle / Southern Coast">Galle / South</option>
-                <option value="Other">Other Destination</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>👥 Group Size</label>
-              <select name="passengers" value={formData.passengers} onChange={handleChange}>
-                <option value="1-3 Passengers">1-3 Passengers</option>
-                <option value="4-7 Passengers">4-7 Passengers</option>
-                <option value="8-10 Passengers">8-10 Passengers</option>
-                <option value="11-14+ Passengers">11-14+ Passengers</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>🚐 Preferred Vehicle</label>
-              <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
-                <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
-                <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
-                <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Analysis Results Summary Box */}
-          {routeDetails ? (
-            <div style={{ background: 'var(--white)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)', marginBottom: '1.25rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', fontSize: '.88rem' }}>
-                <div>
-                  <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🛣️ Route Highway & Road Info</strong>
-                  <p style={{ margin: 0, fontSize: '.85rem' }}>
-                    Route runs via {routeDetails.highway}. Exact distance: <strong>{routeDetails.km} km</strong>. Estimated travel duration: <strong>{routeDetails.time}</strong>.
-                  </p>
-                </div>
-                <div>
-                  <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🧳 Vehicle & Luggage Fit</strong>
-                  <p style={{ margin: 0, fontSize: '.85rem' }}>
-                    {formData.vehicle.includes('KDH')
-                      ? 'Spacious van ideal for groups with up to 10 large suitcases.'
-                      : 'Ideal for light luggage and comfortable group travel.'}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div style={{ textAlign: 'center', padding: '1rem', background: '#fff', borderRadius: 'var(--radius-sm)', border: '1px dashed var(--border)', marginBottom: '1.25rem', fontSize: '.88rem', color: 'var(--text-muted)' }}>
-              👈 Pick a pickup city and destination above to see the exact distance and travel time!
-            </div>
-          )}
-
-          {/* Actions */}
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a
-              href="/tours"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline"
-              style={{ flex: 1, textAlign: 'center' }}
-            >
-              <i className="fa-solid fa-map-location-dot" style={{ color: 'var(--accent)' }}></i> Explore Tours Page 🗺️
-            </a>
-            <button
-              type="button"
-              className="btn btn-accent"
-              style={{ flex: 1 }}
-              onClick={() => setViewMode('quick')}
-            >
-              <i className="fa-solid fa-check-circle"></i> Proceed to Quick Booking
-            </button>
-            <a
-              href={`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(
-                `Hello Sparrow Travels! 🦅\n\nI analysed my trip on your website:\n📍 From: ${formData.from || '-'}\n🏁 To: ${formData.to || '-'}\n🚐 Vehicle: ${formData.vehicle}\n👥 Group: ${formData.passengers}\n${routeDetails ? `📏 Exact Distance: ${routeDetails.km} km\n⏱️ Est. Travel Time: ${routeDetails.time}\n` : ''}Please send me a formal quotation!`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline"
-              style={{ flex: 1, textAlign: 'center' }}
-            >
-              <i className="fa-brands fa-whatsapp" style={{ color: '#25d366' }}></i> Send WhatsApp Request
-            </a>
-          </div>
-        </div>
-      )}
-
-      {/* MODE B: STREAMLINED QUICK BOOKING FORM */}
-      <form onSubmit={handleSubmit}>
-        {/* Row 1: Pickup & Dropoff */}
-        <div className="form-row">
+        {/* Row 1: Pickup & Dropoff (Mobile Order: 1 - Top of form) */}
+        <div className="form-row order-locations">
           <div className="form-group">
             <label>📍 Pick-up Location *</label>
             <select name="from" value={formData.from} onChange={handleChange} required className="form-control">
@@ -468,8 +283,194 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        {/* Row 2: Departure Date, Return Date (if Return), Passengers */}
-        <div className="form-row form-row-3">
+        {/* TRANSPARENT LIVE TRIP DETAILS BOX (Mobile Order: 2 - Right below Pickup/Dropoff, Conditional Reveal) */}
+        <div className={`transparent-details-box order-details-box ${isDetailsVisible ? 'visible' : ''}`}>
+          <div className="transparent-badge-header">
+            <span className="transparent-badge">
+              <i className="fa-solid fa-shield-halved"></i> Accurate Distance & Travel Time Details
+            </span>
+            <span className="transparent-badge-note">
+              {formData.from && formData.to ? '⚡ Live Route Calculation' : 'ℹ️ Select Pickup & Dropoff for Live Calculation'}
+            </span>
+          </div>
+
+          {/* Route Visualizer */}
+          <div className="transparent-route-visual">
+            <div className="transparent-route-point">
+              <span style={{ color: '#ef4444' }}>📍</span>
+              <span>{formData.from || 'Select Pickup'}</span>
+            </div>
+            <div className="transparent-route-arrow">
+              <span className="route-arrow-km">{routeDetails ? `${routeDetails.km} km` : '---'}</span>
+              <i className="fa-solid fa-arrow-right-long route-arrow-icon"></i>
+              <span className="route-arrow-highway">
+                {routeDetails ? routeDetails.highway : 'Direct Route'}
+              </span>
+            </div>
+            <div className="transparent-route-point">
+              <span style={{ color: '#10b981' }}>🏁</span>
+              <span>{formData.to || 'Select Destination'}</span>
+            </div>
+          </div>
+
+          {/* Key Metrics Grid */}
+          <div className="transparent-metrics-grid">
+            <div className="transparent-metric-card">
+              <span className="label">Exact Distance</span>
+              <span className="value">{routeDetails ? `${routeDetails.km} km` : '-'}</span>
+            </div>
+            <div className="transparent-metric-card">
+              <span className="label">Est. Travel Time</span>
+              <span className="value">{routeDetails ? routeDetails.time : '-'}</span>
+            </div>
+            <div className="transparent-metric-card">
+              <span className="label">Vehicle Class</span>
+              <span className="value">{formData.vehicle ? formData.vehicle.split(' ').slice(0, 2).join(' ') : 'Toyota KDH'}</span>
+            </div>
+          </div>
+
+          {/* Transparent Included Highlights */}
+          <div className="transparent-inclusions-list">
+            <div className="transparent-inclusion-item">
+              <i className="fa-solid fa-circle-check"></i> <span>Driver Allowance Included</span>
+            </div>
+            <div className="transparent-inclusion-item">
+              <i className="fa-solid fa-circle-check"></i> <span>Air Conditioned Comfort</span>
+            </div>
+            <div className="transparent-inclusion-item">
+              <i className="fa-solid fa-circle-check"></i> <span>Fuel & Express Tolls</span>
+            </div>
+            <div className="transparent-inclusion-item">
+              <i className="fa-solid fa-circle-check"></i> <span>0 Hidden Extra Fees</span>
+            </div>
+          </div>
+        </div>
+
+        {/* MODE A: FULL TRIP ANALYZER VIEW (if active) */}
+        {viewMode === 'analyse' && (
+          <div className="trip-analyzer-section order-analyzer-extra">
+            <h4 style={{ fontSize: '1.1rem', color: 'var(--primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+              <i className="fa-solid fa-sliders" style={{ color: 'var(--accent)' }}></i>
+              Interactive Route & Distance Analyzer
+            </h4>
+
+            <div className="form-row form-row-3" style={{ marginBottom: '1.25rem' }}>
+              <div className="form-group">
+                <label>📍 Pick-up City / Station</label>
+                <select name="from" value={formData.from} onChange={handleChange} className="form-control">
+                  <option value="">Select Pickup City</option>
+                  <option value="Kilinochchi">Kilinochchi</option>
+                  <option value="Jaffna">Jaffna</option>
+                  <option value="Vavuniya">Vavuniya</option>
+                  <option value="Mullaitivu">Mullaitivu</option>
+                  <option value="Mannar">Mannar</option>
+                  <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
+                  <option value="Colombo City / Fort">Colombo City</option>
+                  <option value="Kandy">Kandy</option>
+                  <option value="Dambulla / Sigiriya">Dambulla / Sigiriya</option>
+                  <option value="Other">Other Location</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>🏁 Drop-off Destination</label>
+                <select name="to" value={formData.to} onChange={handleChange} className="form-control">
+                  <option value="">Select Destination</option>
+                  <option value="Bandaranaike International Airport (BIA Katunayake)">BIA Katunayake Airport</option>
+                  <option value="Colombo City / Fort">Colombo City</option>
+                  <option value="Kilinochchi">Kilinochchi</option>
+                  <option value="Jaffna">Jaffna</option>
+                  <option value="Kandy">Kandy</option>
+                  <option value="Sigiriya">Sigiriya</option>
+                  <option value="Ella">Ella</option>
+                  <option value="Nuwara Eliya">Nuwara Eliya</option>
+                  <option value="Galle / Southern Coast">Galle / South</option>
+                  <option value="Other">Other Destination</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>👥 Group Size</label>
+                <select name="passengers" value={formData.passengers} onChange={handleChange}>
+                  <option value="1-3 Passengers">1-3 Passengers</option>
+                  <option value="4-7 Passengers">4-7 Passengers</option>
+                  <option value="8-10 Passengers">8-10 Passengers</option>
+                  <option value="11-14+ Passengers">11-14+ Passengers</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>🚐 Preferred Vehicle</label>
+                <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
+                  <option value="Toyota KDH Van">Toyota KDH Van (AC, 10-14 Seats)</option>
+                  <option value="Budget Car (Wagon R)">Budget Car - Wagon R (AC, 1-3 Seats)</option>
+                  <option value="Mini Bus">Tourist Mini Bus (AC, 15-30 Seats)</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Analysis Results Summary Box */}
+            {routeDetails ? (
+              <div style={{ background: 'var(--white)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', fontSize: '.88rem' }}>
+                  <div>
+                    <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🛣️ Route Highway & Road Info</strong>
+                    <p style={{ margin: 0, fontSize: '.85rem' }}>
+                      Route runs via {routeDetails.highway}. Exact distance: <strong>{routeDetails.km} km</strong>. Estimated travel duration: <strong>{routeDetails.time}</strong>.
+                    </p>
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '.3rem' }}>🧳 Vehicle & Luggage Fit</strong>
+                    <p style={{ margin: 0, fontSize: '.85rem' }}>
+                      {formData.vehicle.includes('KDH')
+                        ? 'Spacious van ideal for groups with up to 10 large suitcases.'
+                        : 'Ideal for light luggage and comfortable group travel.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '1rem', background: '#fff', borderRadius: 'var(--radius-sm)', border: '1px dashed var(--border)', marginBottom: '1.25rem', fontSize: '.88rem', color: 'var(--text-muted)' }}>
+                👈 Pick a pickup city and destination above to see the exact distance and travel time!
+              </div>
+            )}
+
+            {/* Actions */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a
+                href="/tours"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+                style={{ flex: 1, textAlign: 'center' }}
+              >
+                <i className="fa-solid fa-map-location-dot" style={{ color: 'var(--accent)' }}></i> Explore Tours Page 🗺️
+              </a>
+              <button
+                type="button"
+                className="btn btn-accent"
+                style={{ flex: 1 }}
+                onClick={() => setViewMode('quick')}
+              >
+                <i className="fa-solid fa-check-circle"></i> Proceed to Quick Booking
+              </button>
+              <a
+                href={`https://api.whatsapp.com/send?phone=94754013974&text=${encodeURIComponent(
+                  `Hello Sparrow Travels! 🦅\n\nI analysed my trip on your website:\n📍 From: ${formData.from || '-'}\n🏁 To: ${formData.to || '-'}\n🚐 Vehicle: ${formData.vehicle}\n👥 Group: ${formData.passengers}\n${routeDetails ? `📏 Exact Distance: ${routeDetails.km} km\n⏱️ Est. Travel Time: ${routeDetails.time}\n` : ''}Please send me a formal quotation!`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+                style={{ flex: 1, textAlign: 'center' }}
+              >
+                <i className="fa-brands fa-whatsapp" style={{ color: '#25d366' }}></i> Send WhatsApp Request
+              </a>
+            </div>
+          </div>
+        )}
+
+        {/* Row 2: Departure Date, Return Date (if Return), Passengers (Mobile Order: 3) */}
+        <div className="form-row form-row-3 order-dates-passengers">
           <div className="form-group">
             <label>📅 Departure Date *</label>
             <input type="date" name="date" value={formData.date} onChange={handleChange} required />
@@ -493,8 +494,8 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        {/* Row 3: Vehicle, Name, Phone */}
-        <div className="form-row form-row-3">
+        {/* Row 3: Vehicle, Name, Phone (Mobile Order: 4) */}
+        <div className="form-row form-row-3 order-vehicle-contact">
           <div className="form-group">
             <label>🚐 Preferred Vehicle</label>
             <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
@@ -515,9 +516,12 @@ export default function QuickBookingForm() {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-accent btn-full btn-lg" style={{ marginTop: '.5rem' }}>
-          <i className="fa-brands fa-whatsapp"></i> Instant WhatsApp Quote & Quick Booking
-        </button>
+        {/* Submit Button (Mobile Order: 7) */}
+        <div className="order-submit-btn">
+          <button type="submit" className="btn btn-accent btn-full btn-lg" style={{ marginTop: '.5rem' }}>
+            <i className="fa-brands fa-whatsapp"></i> Instant WhatsApp Quote & Quick Booking
+          </button>
+        </div>
       </form>
     </div>
   );
